@@ -1,0 +1,15 @@
+/*
+
+Custom Css
+
+*/
+
+/*  Custom Font Revx */
+@font-face {
+  font-family: "Revx";
+  src: url("../fonts/RevxNeueDemo-SemiBold.ttf") format("truetype");
+}
+
+.revx-font {
+  font-family: "Revx";
+}
