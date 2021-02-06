@@ -2,6 +2,8 @@
 
     require_once("header.php");  
 
+    //this is a test
+
 ?>
 
     <!-- Hero Section Begin -->
