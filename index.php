@@ -2,14 +2,20 @@
 
     require_once("header.php");  
 
-    $selectAll = "select * from product";
 
-    $result = $db->query($selectAll);
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            echo "hi";
-          }
+    //Testing my connection to the database
+    // $connection=$database->table_exists("prodopt");
+
+    // if($connection == TRUE)
+    // {
+    //     //echo "True";
+    // }
+    // else {
+    //     //echo "False";
+    // }
+
+
 
 ?>
 

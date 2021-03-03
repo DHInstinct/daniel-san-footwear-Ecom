@@ -1,9 +1,30 @@
 <?
     require_once("header.php");
+
+    $product = new Product();
+    $category = new Category();
+    $prod = $product->GetProduct($_GET['id']);
+
+    $cat = $category->GetMainCat();
+
+    // $product->printAllProd();
+    // here is where you would process your data display
+    // print_r($prod);
+
+    $img = (file_exists("../../products/" . $prod['id'] . "_1.jpg") ? $prod['id'] . "_1" : "noimage");
+
+    $images = $product->GetMultipleImages($_GET['id']);
+    // print_r($images);
+
+
+    echo($cat['maincat']);
+    
 ?>
 
+
+
 <!-- Breadcrumb Section Begin -->
-<div class="breacrumb-section">
+<!-- <div class="breacrumb-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -15,7 +36,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Breadcrumb Section Begin -->
 
 <!-- Product Shop Section Begin -->
@@ -149,29 +170,31 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
-                            <img class="product-big-img" src="img/product-single/product-1.jpg" alt="">
-                            <div class="zoom-icon">
-                                <i class="fa fa-search-plus"></i>
-                            </div>
-                        </div>
-                        <div class="product-thumbs">
-                            <div class="product-thumbs-track ps-slider owl-carousel">
-                                <div class="pt active" data-imgbigurl="img/product-single/product-1.jpg"><img
-                                        src="img/product-single/product-1.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/product-single/product-2.jpg"><img
-                                        src="img/product-single/product-2.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/product-single/product-3.jpg"><img
-                                        src="img/product-single/product-3.jpg" alt=""></div>
-                                <div class="pt" data-imgbigurl="img/product-single/product-3.jpg"><img
-                                        src="img/product-single/product-3.jpg" alt=""></div>
-                            </div>
-                        </div>
+                            <?
+                            
+                            if($images.count() == 1){
+
+                                echo "<img class='product-big-img' src='../../products/" . $img . ".jpg' height='300px' width='300px'>";
+                            }
+                            else{
+                                echo "<img class='product-big-img' src='../../products/" . $img . ".jpg'>";
+                                echo "<div class='product-thumbs'><div class='product-thumbs-track ps-slider owl-carousel'>";
+                                foreach($images as $image)
+                                {
+                                    echo("<div class='pt active' data-imgbigurl=" . $image . "><img src=" . $image . " alt=''></div>");
+                                }
+                            }
+                            
+                            ?>
+                            </div> 
+                         </div>
+                      </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="product-details">
                             <div class="pd-title">
                                 <span>oranges</span>
-                                <h3>Pure Pineapple</h3>
+                                <h3><?echo($prod['name']); ?></h3>
                                 <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                             </div>
                             <div class="pd-rating">
@@ -183,9 +206,11 @@
                                 <span>(5)</span>
                             </div>
                             <div class="pd-desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum dolor
-                                    sit amet, consectetur adipisicing elit, sed do mod tempor</p>
-                                <h4>$495.00 <span>629.99</span></h4>
+                                <p><?
+                                    echo($prod['descript']);
+                                ?></p>
+                                <h4><?echo('$');
+                                        echo($prod['price']);?> 
                             </div>
                             <div class="pd-color">
                                 <h6>Color</h6>
@@ -264,18 +289,15 @@
                                     <div class="row">
                                         <div class="col-lg-7">
                                             <h5>Introduction</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            <p><?echo($prod['descript'])?> </p>
+                                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                                                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
                                                 ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                                            <h5>Features</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
+                                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p> -->
                                         </div>
                                         <div class="col-lg-5">
-                                            <img src="img/product-single/tab-desc.jpg" alt="">
+                                        <?echo "<img src='../../products/" . $img . ".jpg'>";?>
+                                            <??>
                                         </div>
                                     </div>
                                 </div>
@@ -311,13 +333,13 @@
                                         <tr>
                                             <td class="p-catagory">Availability</td>
                                             <td>
-                                                <div class="p-stock">22 in stock</div>
+                                                <div class="p-stock"><?echo($prod['quantity'])?></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="p-catagory">Weight</td>
                                             <td>
-                                                <div class="p-weight">1,3kg</div>
+                                                <div class="p-weight"><?echo($prod['weight'])?></div>
                                             </td>
                                         </tr>
                                         <tr>

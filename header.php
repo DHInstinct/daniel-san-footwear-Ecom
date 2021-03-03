@@ -2,12 +2,14 @@
 
     require_once("config.php");
 
-    //This is a test 
+    $category = new Category();
 
-    // for ($x = 0; $x <= 10; $x++) {
-    //     echo "The number is: $x ";
-    //   }
+    $cat = $category->GetMainCat();
 
+    
+
+    // print_r($cat);
+    
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +42,9 @@
 </head>
 
 <body>
-        <div id="preloder">
+        <!-- <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div> -->
     
     <!-- Header Section Begin -->
      <header class="header-section">
@@ -136,8 +138,13 @@
                     <div class="depart-btn">
                         <i class="ti-menu"></i>
                         <span>All departments</span>
-                        <ul class="depart-hover">
-                                <li><a href="#">Men's Footwear</a></li>
+                        <ul class="depart-hover"><?
+
+                            foreach($cat as $data){
+                                echo("<li><a href='shop.php?cat=" . $data['id'] . "'>" . $data['name']. "</a></li>");
+                            }
+                        ?>
+                        
                         </ul>
                     </div>
                 </div>
