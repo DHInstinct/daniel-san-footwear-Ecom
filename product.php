@@ -47,9 +47,23 @@
                 <div class="filter-widget">
                     <h4 class="fw-title">Categories</h4>
                     <ul class="filter-catagories">
-                        <li><a href="#">Men</a></li>
+                        <!-- <li><a href="#">Men</a></li>
                         <li><a href="#">Women</a></li>
-                        <li><a href="#">Kids</a></li>
+                        <li><a href="#">Kids</a></li> -->
+                        <?
+                            $sideBarCat = $category->GetSubCat();    
+
+                            foreach($sideBarCat as $data)
+                            {
+                                
+                                echo("
+                                <li><a href='shop.php?subcat=". $data['id'] . "'>
+                                    ".$data['name']."
+                                </a></li>
+                                ");
+                            }
+                        
+                        ?>
                     </ul>
                 </div>
                 <div class="filter-widget">
@@ -209,8 +223,7 @@
                                 <p><?
                                     echo($prod['descript']);
                                 ?></p>
-                                <h4><?echo('$');
-                                        echo($prod['price']);?> 
+                                <h4>$<? echo(number_format($prod['price']));?> 
                             </div>
                             <div class="pd-color">
                                 <h6>Color</h6>
@@ -254,15 +267,16 @@
                                 <a href="#" class="primary-btn pd-cart">Add To Cart</a>
                             </div>
                             <ul class="pd-tags">
-                                <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
-                                <li><span>TAGS</span>: Clothing, T-shirt, Woman</li>
+                                <!-- Going to add these in later
+                                    <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
+                                <li><span>TAGS</span>: Clothing, T-shirt, Woman</li> -->
                             </ul>
                             <div class="pd-share">
-                                <div class="p-code">Sku : 00012</div>
+                                <div class="p-code"><!-- SKU:00012--></div>
                                 <div class="pd-social">
-                                    <a href="#"><i class="ti-facebook"></i></a>
+                                    <!-- <a href="#"><i class="ti-facebook"></i></a>
                                     <a href="#"><i class="ti-twitter-alt"></i></a>
-                                    <a href="#"><i class="ti-linkedin"></i></a>
+                                    <a href="#"><i class="ti-linkedin"></i></a> -->
                                 </div>
                             </div>
                         </div>
@@ -321,7 +335,7 @@
                                         <tr>
                                             <td class="p-catagory">Price</td>
                                             <td>
-                                                <div class="p-price">$495.00</div>
+                                                <div class="p-price">$<?echo(number_format($prod['price']))?></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -342,13 +356,14 @@
                                                 <div class="p-weight"><?echo($prod['weight'])?></div>
                                             </td>
                                         </tr>
+                                        <!-- Going to add theses back in evenutally.
                                         <tr>
                                             <td class="p-catagory">Size</td>
                                             <td>
                                                 <div class="p-size">Xxl</div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                             <tr>
                                             <td class="p-catagory">Color</td>
                                             <td><span class="cs-color"></span></td>
                                         </tr>
@@ -357,7 +372,7 @@
                                             <td>
                                                 <div class="p-code">00012</div>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </table>
                                 </div>
                             </div>

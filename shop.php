@@ -48,8 +48,6 @@
                         echo("<div class='bc-item'>
                         <a href='shop.php?subcat=". $data['id'] . "'>
                             ".$data['name']."
-                        <input type='checkbox' id='bc-calvin'>
-                        <span class='checkmark'></span>
                         </a>
                         </div>");
                     }
