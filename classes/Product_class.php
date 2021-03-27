@@ -12,23 +12,66 @@ class Product
         $this->database = DB::getInstance();
     }
 
+    public static function GetImage($pro_ID)
+    {
+        $image = '../../products/' . $pro_ID . '_1.jpg';
+
+        //Return the image
+        return $image;
+    }
+
+
+    public function GetFeat()
+    {
+         $query = "select pro_id id, pro_name name, pro_price price, pro_feat, cat_Name catname, category.cat_ID subcatid from product inner join category on category.cat_ID=product.cat_ID where pro_feat ='Y' order by price";
+         $results = $this->database->get_results($query);
+
+         foreach($results as $result)
+         {
+             Product::ProdFeatHTML($result);
+         }
+    }
+
+    public static function ProdFeatHTML($data)
+    {
+        echo("<div class='product-item'>
+        <div class='pi-pic'>
+            <img src='../../products/" . $data['id'] . "_1.jpg' alt='' height='300px'>
+            <div class='sale'>Sale</div>
+            <div class='icon'>
+                <i class='icon_heart_alt'></i>
+            </div>
+            <ul>
+                <li class='w-icon active'><a href='#'><i class='icon_bag_alt'></i></a></li>
+                <li class='quick-view'><a href='product.php?id=" . $data['id'] . "'>+ Quick View</a></li>
+                <li class='w-icon'><a href='#'><i class='fa fa-random'></i></a></li>
+            </ul>
+        </div>
+        <div class='pi-text'>
+            <div class='catagory-name'><a href='shop.php?subcat=". $data['subcatid'] . "'>" . $data['catname'] . "</a></div>
+            <a href='#'>
+                <h5>" . $data['name'] . "</h5>
+            </a>
+            <div class='product-price'>$
+            " . $data['price'] . "
+            </div>
+        </div>
+    </div>");
+    }
+
 
     public function PrintSingleItem($pro_ID)
     {
         $query = "select pro_Name, pro_Descript, pro_Price, pro_Qty, pro_Manufacturer, pro_Model, pro_Weight FROM product where pro_id=$pro_ID";
 
         $results = $this->database->get_results($query);
-
-            // echo($results[0]['pro_ID'] . "'>" . $results[0]['pro_Name']);
     }
 
     //printing all of the data in products table
     public function printAllProd()
     {
-        $query = "select pro_ID id, pro_Name name, pro_Price price FROM product";
+        $query = "select pro_Model as model, pro_Manufacturer manu, pro_ID id, pro_Name name, pro_Price price FROM product";
         $results = $this->database->get_results($query);
-
-        //echo("<a href='product.php?id=" . $row['id'] . "'>" . $row['name'] . "</a>");
 
         foreach($results as $row)
         {
@@ -43,11 +86,6 @@ class Product
         $results = $this->database->get_results($query);
 
         return $results;
-
-        // foreach($results as $row)
-        // {
-        // }
-
     }
 
     public function GetMultipleImages($id)
@@ -81,6 +119,38 @@ class Product
             
             // return the values at array index 0 since this is to return a single product
             return $results[0];
+    }
+
+
+
+    //Assignment 3 functions
+    public function GetManu()
+    {
+        $query = "select distinct(pro_Manufacturer) manu from product order by pro_Manufacturer";
+        $manus = $this->database->get_results($query);
+       
+        foreach ($manus as $manu)
+        {
+          echo "<a href='#' class='manu'>" . $manu['manu'] . "</a>";
+        }
+        
+    }
+
+    public function GetModel()
+    {
+        $query = "select distinct(pro_Model) model from product order by pro_Manufacturer";
+        $models = $this->database->get_results($query);
+
+        // echo("<select>"); Everything decides to break if put It in a dropdown...
+        // I will format in a dropdown eventually.
+        $counter = 0;
+        foreach($models as $model)
+        {
+            echo "<a href='#' class='model'>" . $model['model'] . "</a>";
+            
+        }
+        // echo("</select>");
+
     }
 }
 

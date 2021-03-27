@@ -4,6 +4,9 @@
 
     config.php will include all global variables, and any site wide requirements.
 
+    alternative to ../../../../products/
+    you could use /CIT410/products/
+
 
 */
  // Database Connection

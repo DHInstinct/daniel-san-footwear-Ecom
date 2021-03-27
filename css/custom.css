@@ -14,12 +14,29 @@ Custom Css
   font-family: "Revx";
 }
 
-a { 
-   color: black;
-   
+a {
+  color: black;
 }
 
-a:hover { 
+a:hover {
   color: grey;
-  
+}
+
+#outputsearch {
+  /* width | style | color */
+  text-align: center;
+}
+
+#searchtitle {
+  color: grey;
+}
+
+.miniImg {
+  height: 50px;
+  width: 50px;
+}
+
+.added{
+  border: 4px solid #E7AB3C;
+  padding: 3%;
 }

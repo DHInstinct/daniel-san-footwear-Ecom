@@ -3,6 +3,7 @@
 
     $product = new Product();
     $category = new Category();
+    $review = new Review();
     $prod = $product->GetProduct($_GET['id']);
 
     $cat = $category->GetMainCat();
@@ -17,7 +18,7 @@
     // print_r($images);
 
 
-    echo($cat['maincat']);
+    $getid = $_GET['id'];
     
 ?>
 
@@ -66,7 +67,7 @@
                         ?>
                     </ul>
                 </div>
-                <div class="filter-widget">
+                <!-- <div class="filter-widget">
                     <h4 class="fw-title">Brand</h4>
                     <div class="fw-brand-check">
                         <div class="bc-item">
@@ -166,19 +167,17 @@
                             <label for="xs-size">xs</label>
                         </div>
                     </div>
-                </div>
-                <div class="filter-widget">
+                </div> -->
+                <!-- <div class="filter-widget">
                     <h4 class="fw-title">Tags</h4>
                     <div class="fw-tags">
-                        <a href="#">Towel</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Coat</a>
-                        <a href="#">Dresses</a>
-                        <a href="#">Trousers</a>
-                        <a href="#">Men's hats</a>
-                        <a href="#">Backpack</a>
+                        <?
+                        
+                        //$product->GetManu();
+                        
+                        ?>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-lg-9">
                 <div class="row">
@@ -188,7 +187,7 @@
                             
                             if($images.count() == 1){
 
-                                echo "<img class='product-big-img' src='../../products/" . $img . ".jpg' height='300px' width='300px'>";
+                                echo "<img data-image=" . Product::GetImage($_GET['id']) . " class='product-big-img' src='../../products/" . $img . ".jpg' height='300px' width='300px'>";
                             }
                             else{
                                 echo "<img class='product-big-img' src='../../products/" . $img . ".jpg'>";
@@ -208,7 +207,7 @@
                         <div class="product-details">
                             <div class="pd-title">
                                 <span>oranges</span>
-                                <h3><?echo($prod['name']); ?></h3>
+                                <h3 class=name data-name=<?echo($prod['name']);?>><?echo($prod['name']); ?></h3>
                                 <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                             </div>
                             <div class="pd-rating">
@@ -225,7 +224,7 @@
                                 ?></p>
                                 <h4>$<? echo(number_format($prod['price']));?> 
                             </div>
-                            <div class="pd-color">
+                            <!-- <div class="pd-color">
                                 <h6>Color</h6>
                                 <div class="pd-color-choose">
                                     <div class="cc-item">
@@ -259,17 +258,17 @@
                                     <input type="radio" id="xl-size">
                                     <label for="xl-size">xs</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <input type="text" value="1">
                                 </div>
-                                <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                <button id="addToCart" data-id=<?=$_GET['id'];?> class="primary-btn pd-cart">Add To Cart</button>
                             </div>
                             <ul class="pd-tags">
-                                <!-- Going to add these in later
-                                    <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
-                                <li><span>TAGS</span>: Clothing, T-shirt, Woman</li> -->
+                                   
+                            <!-- success message --> 
+                                <div class='added'><h3></h3></div>
                             </ul>
                             <div class="pd-share">
                                 <div class="p-code"><!-- SKU:00012--></div>
@@ -292,7 +291,7 @@
                                 <a data-toggle="tab" href="#tab-2" role="tab">SPECIFICATIONS</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#tab-3" role="tab">Customer Reviews (02)</a>
+                                <a data-toggle="tab" href="#tab-3" role="tab">Customer Reviews</a>
                             </li>
                         </ul>
                     </div>
@@ -319,19 +318,6 @@
                             <div class="tab-pane fade" id="tab-2" role="tabpanel">
                                 <div class="specification-table">
                                     <table>
-                                        <tr>
-                                            <td class="p-catagory">Customer Rating</td>
-                                            <td>
-                                                <div class="pd-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
                                         <tr>
                                             <td class="p-catagory">Price</td>
                                             <td>
@@ -378,63 +364,35 @@
                             </div>
                             <div class="tab-pane fade" id="tab-3" role="tabpanel">
                                 <div class="customer-review-option">
-                                    <h4>2 Comments</h4>
+                                    <h4>Reviews</h4>
+                                    <h5>Average Score: <strong><? 
+                                    
+                                        $review->CalculateScore($_GET['id']);
+                                    
+                                    ?></strong></h5>
                                     <div class="comment-option">
                                         <div class="co-item">
-                                            <div class="avatar-pic">
-                                                <img src="img/product-single/avatar-1.png" alt="">
-                                            </div>
-                                            <div class="avatar-text">
-                                                <div class="at-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <h5>Brandon Kelley <span>27 Aug 2019</span></h5>
-                                                <div class="at-reply">Nice !</div>
-                                            </div>
-                                        </div>
-                                        <div class="co-item">
-                                            <div class="avatar-pic">
-                                                <img src="img/product-single/avatar-2.png" alt="">
-                                            </div>
-                                            <div class="avatar-text">
-                                                <div class="at-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <h5>Roy Banks <span>27 Aug 2019</span></h5>
-                                                <div class="at-reply">Nice !</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="personal-rating">
-                                        <h6>Your rating</h6>
-                                        <div class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                                            <?
+                                                $review->PrintReview($_GET['id']);
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="leave-comment">
                                         <h4>Leave A Comment</h4>
-                                        <form action="#" class="comment-form">
+                                        <form action="js/ajax/sendReview.php" class="comment-form" method="POST">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <input type="text" placeholder="Name">
+                                                <div class="col-lg-4">
+                                                    <input type="text" id="name" name="name" placeholder="Name">
+                                                    <input type="hidden" id="prodID" name="prodID" value=<?echo($_GET['id'])?>>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" placeholder="Email">
+                                                <div class="col-lg-4">
+                                                    <input type="text" id="email" name="email" placeholder="Email">
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input type="text" id="score" name="score" placeholder="Score">
                                                 </div>
                                                 <div class="col-lg-12">
-                                                    <textarea placeholder="Messages"></textarea>
+                                                    <textarea placeholder="Messages" id="message" name="message"></textarea>
                                                     <button type="submit" class="site-btn">Send message</button>
                                                 </div>
                                             </div>

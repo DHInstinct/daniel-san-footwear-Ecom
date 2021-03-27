@@ -38,6 +38,8 @@
                 <div class="filter-widget">
                     <h4 class="fw-title">Categories</h4>
                     <div class="fw-brand-check">
+                    <div class="fw-tags">
+
                     <?
 
                     $sideBarCat = $category->GetSubCat();    
@@ -54,12 +56,13 @@
                     ?>
                     </div>
                 </div>
-                <div class="filter-widget">
+                </div>
+                <!-- <div class="filter-widget">
                     <h4 class="fw-title">Price</h4>
                     <div class="filter-range-wrap">
                         <div class="range-slider">
                             <div class="price-input">
-                                <input type="text" id="minamount">
+                                <input type="text" value='34' id="minamount">
                                 <input type="text" id="maxamount">
                             </div>
                         </div>
@@ -71,7 +74,7 @@
                         </div>
                     </div>
                     <a href="#" class="filter-btn">Filter</a>
-                </div>
+                </div> -->
                 <!-- <div class="filter-widget">
                     <h4 class="fw-title">Color</h4>
                     <div class="fw-color-choose">
@@ -123,16 +126,17 @@
                     </div>
                 </div> -->
                 <div class="filter-widget">
-                    <h4 class="fw-title">Tags</h4>
+                  <h4 class="fw-title">Sort by Manufacturer</h4>
                     <div class="fw-tags">
-                        <a href="#">Towel</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Coat</a>
-                        <a href="#">Dresses</a>
-                        <a href="#">Trousers</a>
-                        <a href="#">Men's hats</a>
-                        <a href="#">Backpack</a>
+                      <b><a href='shop.php'>Remove Filter</a></b>
+                        <?$product->GetManu();?>
                     </div>
+                    <br />
+                    <br />
+                  <h4 class="fw-title">Sort by Model</h4>
+                 <div class="fw-tags"> 
+                    <?$product->GetModel();?>
+                 </div>
                 </div>
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
@@ -141,7 +145,7 @@
                         <div class="col-lg-7 col-md-7">
                             <div class="select-option">
                                 <select class="sorting">
-                                    <option value="">Default Sorting</option>
+                                    <?// coming back to this: $product->GetManu();?>
                                 </select>
                                 <select class="p-show">
                                     <option value="">Show:</option>
@@ -156,8 +160,6 @@
                 <div class="product-list">
                     <div class="row">
                     <?
-
-                        //checking if 
                         if($_GET['cat'] == NULL && (!isset($_GET['subcat'])))
                         {
                             $product->printAllProd();
@@ -169,8 +171,6 @@
                         else{
                             $category->PrintSubCat($_GET['subcat']);
                         }
-                        
-                    
                     ?>
                         
                             </div> 

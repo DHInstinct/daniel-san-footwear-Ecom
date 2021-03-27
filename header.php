@@ -1,15 +1,28 @@
 <?
 
+    //Check if cookie exists
+    if(isset($_COOKIE['cartID']))
+    {
+      session_id($_COOKIE['cartID']);
+      session_start();
+    }
+    else
+    {
+      session_start();
+      //Set cookie to expire in one week.
+      setcookie('cartID', session_id(), time()+60*60*24*7, "/");
+    }
+
     require_once("config.php");
 
     $category = new Category();
+    $cart = new Cart();
 
     $cat = $category->GetMainCat();
 
+
     
 
-    // print_r($cat);
-    
 ?>
 
 <!DOCTYPE html>
@@ -67,10 +80,11 @@
                                 </li>
                             </ul> -->
                             <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
+                                <input id='search' type="text" placeholder="What do you need?">
                                 <button type="button"><i class="ti-search"></i></button>
                             </div>
                         </div>
+                        <div id='outputsearch'></div>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
@@ -83,42 +97,21 @@
                             <li class="cart-icon">
                                 <a href="shopping-cart.php">
                                     <i class="icon_bag_alt"></i>
-                                    <span><!--total amt --></span>
+                                    <span></span>
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
                                         <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="si-pic"><img src="img/select-product-1.jpg" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="si-pic"><img src="img/select-product-2.jpg" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
+                                            <tbody class='miniCartBody'>
+                                                <?
+                                                    $cart->UpdateMiniCart(session_id());
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="select-total">
                                         <span>total:</span>
-                                        <h5>$120.00</h5>
+                                        <h5><?echo($cart->CalculateTotal(session_id())); ?></h5>
                                     </div>
                                     <div class="select-button">
                                         <a href="shopping-cart.php" class="primary-btn view-card">VIEW CART</a>
