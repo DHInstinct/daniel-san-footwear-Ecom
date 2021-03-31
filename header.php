@@ -104,7 +104,23 @@
                                         <table>
                                             <tbody class='miniCartBody'>
                                                 <?
-                                                    $cart->UpdateMiniCart(session_id());
+                                                    $mini = $cart->UpdateMiniCart(session_id());
+                                                    foreach($mini as $data)
+                                                    {
+                                                        echo("<tr>
+                                                        <td class='si-pic'><img class='img-thumbnail miniImg' src=".Product::GetImage($data['pro_ID']) ."></td>
+                                                        <td class='si-text'>
+                                                            <div class='product-selected'>
+                                                                <p>$" . $data['pro_Price'] . " x " . $data['cart_qty'] . "</p>
+                                                                <h6>" . $data['pro_Name'] . "</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td class='si-close'>
+                                                            <i class='ti-close'></i>
+                                                        </td>
+                                                        </tr>
+                                                        ");
+                                                    }
                                                 ?>
                                             </tbody>
                                         </table>

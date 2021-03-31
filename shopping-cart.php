@@ -44,7 +44,28 @@
                         <!-- js/ajax/updateCart.php -->
                         
                             <?
-                                $cart->FillCart(session_id());
+                                $CartItems = $cart->FillCart(session_id());
+
+                                foreach($CartItems as $data)
+                                {
+                                    echo("
+                                        <tr>
+                                        <td class='cart-pic first-row'><img src='" . Product::GetImage($data['pro_ID']) . "' alt=''></td>
+                                        <td class='cart-title first-row'>
+                                        <h5>" . $data['pro_Name'] . "</h5>
+                                        </td>
+                                        <td class='p-price first-row'>$". number_format($data['pro_Price'], 2)."</td>
+                                            <td class='qua-col first-row'>
+                                                <div class='quantity'>
+                                                    <div class='pro-qty'>
+                                                        <input type='text' class='prodIDdata' data-id='" . $data['pro_ID']. "' value='" . $data['cart_qty'] . "'>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <td class='total-price first-row'>$" .number_format($data['cart_qty'] * $data['pro_Price'], 2) . "</td>
+                                        </tr>
+                                        ");
+                                }
                             ?>
                         </tbody>
                     </table>

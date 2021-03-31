@@ -134,4 +134,34 @@ $(document).ready(function () {
             }
         );
     });
+
+
+
+    //quick view
+    $('.quickview').click(function (){
+
+        
+
+        var name = $(this).data("name");
+        var price = $(this).data('price');
+        var img = $(this).data('img');
+
+        $.ajax(
+            {
+                url: "js/ajax/quickview.php",
+                data: { name: name, price: price, img: img },
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    $('#title').html(data.name)
+                    $('#price').html(data.price)
+                    $('#img').attr("src", data.img)
+                },
+                error: function (data) {
+                    alert("error");
+                }
+            }
+        );
+    });
+
 });
