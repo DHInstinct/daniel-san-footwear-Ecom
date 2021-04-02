@@ -82,6 +82,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<!-- Tiny Sort plugin -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tinysort/3.2.5/tinysort.min.js'></script>
+<!-- Light box plugin -->
+<script src="https://cdn.jsdelivr.net/npm/shadowbox-js@3.0.3/source/shadowbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js%22%3E"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js%22%3E"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js%22%3E"></script>
 <!-- Custom JavaScript -->
 <script src="js/custom.js"></script>
 

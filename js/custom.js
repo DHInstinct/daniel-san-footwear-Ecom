@@ -71,10 +71,22 @@ $(document).ready(function () {
     //event listener for adding to cart
     $('#addToCart').click(function () {
 
+        var option = $('.option').children('option:selected').data('option');
+        // alert($('option').children());
+        var optionsArray = [];
+
+        // $('.option').each(function (index, value) {
+        optionsArray.push({
+            // option: $('option'),
+            // });
+        });
+
+        console.log(JSON.stringify(optionsArray));
+
         $.ajax(
             {
                 url: "js/ajax/addToCart.php",
-                data: { product: $(this).data("id") },
+                data: { product: $(this).data("id"), option: option },
                 method: 'post',
                 dataType: 'json',
                 success: function (data) {
@@ -138,24 +150,25 @@ $(document).ready(function () {
 
 
     //quick view
-    $('.quickview').click(function (){
-
-        
+    $('.quickview').click(function () {
 
         var name = $(this).data("name");
         var price = $(this).data('price');
         var img = $(this).data('img');
+        var id = $(this).data('id');
 
         $.ajax(
             {
                 url: "js/ajax/quickview.php",
-                data: { name: name, price: price, img: img },
+                data: { name: name, price: price, img: img, id: id },
                 method: 'post',
                 dataType: 'json',
                 success: function (data) {
                     $('#title').html(data.name)
                     $('#price').html(data.price)
                     $('#img').attr("src", data.img)
+                    $('#addToCart').attr("data-id", data.id)
+
                 },
                 error: function (data) {
                     alert("error");
@@ -164,4 +177,39 @@ $(document).ready(function () {
         );
     });
 
+    //implementing tiny sort
+
+    //https://stackoverflow.com/questions/8433691/sorting-list-of-elements-in-jquery
+    function getSorted(selector, attrName) {
+        return $($(selector).toArray().sort(function (a, b) {
+            var aVal = parseInt(a.getAttribute(attrName)),
+                bVal = parseInt(b.getAttribute(attrName));
+            return aVal - bVal;
+        }));
+    }
+    //sorting price asc
+    $('.sort-price-asc').click(function () {
+        tinysort('div.sort>div', { data: 'price', order: 'asc' });
+
+    });
+
+    //sorting price desc
+    $('.sort-price-desc').click(function () {
+
+        tinysort('div.sort>div', { data: 'price', order: 'desc' });
+    });
+
+    //sorting name asc
+    $('.sort-name-az').click(function () {
+
+        tinysort('div.sort>div', { data: 'name', order: 'asc' });
+
+    });
+
+    //sorting name desc
+    $('.sort-name-za').click(function () {
+
+        tinysort('div.sort>div', { data: 'name', order: 'desc' });
+
+    });
 });

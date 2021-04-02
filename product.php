@@ -73,10 +73,12 @@
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
                             <?
-                            
-                            if($images.count() == 1){
+
+                            if(count($images) == 1){
 
                                 echo "<img data-image=" . Product::GetImage($_GET['id']) . " class='product-big-img' src='../../products/" . $img . ".jpg' height='300px' width='300px'>";
+                                echo "<div class='product-thumbs'><div class='product-thumbs-track ps-slider owl-carousel'>";
+                                
                             }
                             else{
                                 echo "<img class='product-big-img' src='../../products/" . $img . ".jpg'>";
@@ -119,8 +121,19 @@
                                 </div>
                                 <button id="addToCart" data-id=<?=$_GET['id'];?> class="primary-btn pd-cart">Add To Cart</button>
                             </div>
-                            <ul class="pd-tags">
-                                   
+                            <h3 class='name'> Add Options </h3>
+                            <select class='option'>
+                            <option data-option='No Option'></option>
+                                 <?
+                                    $options = $product->GetOptions($_GET['id']);
+                                    foreach($options as $option)
+                                    {
+                                        echo("<option class='downdown-item' data-option='" .$option['option'] . "' href='#'>".$option['option']."</option><br />");
+                                    }
+                                    
+                                    ?>
+                            </select>
+
                             <!-- success message --> 
                                 <div class='added'><h3></h3></div>
                             </ul>

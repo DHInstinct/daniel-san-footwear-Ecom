@@ -101,6 +101,15 @@ class Product
 
         return $models;
     }
+
+    public function GetOptions($id)
+    {
+        $query = "select opt_Value as 'option' from prodopt where pro_id='$id';";
+
+        $results=$this->database->get_results($query);
+
+        return $results;
+    }
 }
 
 ?>

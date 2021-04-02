@@ -2,11 +2,23 @@
     // start our session
     session_start();
     session_id($_COOKIE['cartID']);
-
     require_once("../../config.php");
 
-    // simply take the product ID that we get via POST and add it to the cart table
     $cart = new DB();
+    $option = $_POST['option'];
+
+
+    //handing product options.
+     if($option != "No Option")
+     {
+        $query = "select opt_ID, pro_ID from prodopt where opt_Value ='$option';";
+        $item = $cart->get_row($query);
+
+        $where = array("cart_ID"=>session_id(), "opt_ID"=>$item[0], "pro_ID"=>$item[1]);
+        $cart->insert('cartopts', $where);
+
+     }
+    // simply take the product ID that we get via POST and add it to the cart table
 
     // add the item to the cart
     // this assumes the item was not already there... must check to see if it existed and if so, increment the quantity

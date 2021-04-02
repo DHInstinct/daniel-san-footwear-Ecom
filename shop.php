@@ -84,18 +84,19 @@
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7">
-                            <div class="select-option">
-                                <select class="sorting">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="fw-tags">
+                            <button class="btn sortedButns sort-price-asc">Sort By Price $-$$$</button>
+                            <button class='btn sortedButns sort-price-desc'>Sort By Price $$$-$</button>
+                            <button class='btn sortedButns sort-name-az'>Sort By Manu A-Z</button>
+                            <button class='btn sortedButns sort-name-za'>Sort By Manu Z-A</button>
+                                <!-- <select class="sorting">
                                     <?// coming back to this: $product->GetManu();?>
                                 </select>
                                 <select class="p-show">
                                     <option value="">Show:</option>
-                                </select>
+                                </select> -->
                             </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5 text-right">
-                            <p>Show 01- 09 Of 36 Product</p>
                         </div>
                     </div>
                 </div>
@@ -107,8 +108,8 @@
                             $results = $product->printAllProd();
                             foreach($results as $rows)
                             {
-                                echo ("<div class='col-lg-4 col-sm-6'>");
-                                echo ("<div class='product-item product'>");
+                                echo ("<div class='col-lg-4 col-sm-6 sort'>");
+                                echo ("<div class='product-item product'data-name='" . $rows['name'] . "'data-price='" .$rows['price'] . "'>");
                                     echo ("<div class='pi-pic'>");
                                         echo ("<img src='../../products/" . $rows['id'] . "_1.jpg' height='300px' width='300px'>");
                                                    echo ("<div class='sale pp-sale'>Sale</div>");
@@ -117,7 +118,7 @@
                                                     echo ("</div>");
                                                     echo ("<ul>");
                                                        echo("<li class='w-icon active'><a href='#'><i class='icon_bag_alt'></i></a></li>");
-                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
+                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-id='" . $rows['id']. "' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
                                                        echo ("<li class='w-icon'><a href='#'><i class='fa fa-random'></i></a></li>");
                                                   echo ("</ul>");
                                                 echo("</div>");
@@ -127,9 +128,8 @@
                                                    echo ("<a href='product.php?id=" . $rows['id'] . "'");
                                                    echo ("<h5 >" . $rows['name'] . "</h5>");
                                                   echo  ("</a>");
-                                                  echo ("<div class='product-price'>");
+                                                  echo ("<div class='product-price price' data-price='" .$rows['price'] . "'>$");
                                                   echo ($rows['price']);
-                                                  echo ("<span>$35.00</span>");
                                                    echo ("</div>");
                                                 echo ("</div>");
                                             echo("</div>");
@@ -141,8 +141,8 @@
                             $results = $category->PrintBasedOnMainCat($_GET['cat']);
                             foreach($results as $rows)
                             {
-                                echo ("<div class='col-lg-4 col-sm-6'>");
-                                echo ("<div class='product-item product'>");
+                                echo ("<div class='col-lg-4 col-sm-6 sort'>");
+                                echo ("<div class='product-item product'data-name='" . $rows['name'] . "'data-price='" .$rows['price'] . "'>");
                                     echo ("<div class='pi-pic'>");
                                         echo ("<img src='../../products/" . $rows['id'] . "_1.jpg' height='300px' width='300px'>");
                                                    echo ("<div class='sale pp-sale'>Sale</div>");
@@ -151,7 +151,7 @@
                                                     echo ("</div>");
                                                     echo ("<ul>");
                                                        echo("<li class='w-icon active'><a href='#'><i class='icon_bag_alt'></i></a></li>");
-                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
+                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-id='" . $rows['id']. "' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
                                                        echo ("<li class='w-icon'><a href='#'><i class='fa fa-random'></i></a></li>");
                                                   echo ("</ul>");
                                                 echo("</div>");
@@ -161,22 +161,20 @@
                                                    echo ("<a href='product.php?id=" . $rows['id'] . "'");
                                                    echo ("<h5 >" . $rows['name'] . "</h5>");
                                                   echo  ("</a>");
-                                                  echo ("<div class='product-price'>");
+                                                  echo ("<div class='product-price price' data-price='" .$rows['price'] . "'>$");
                                                   echo ($rows['price']);
-                                                  echo ("<span>$35.00</span>");
                                                    echo ("</div>");
                                                 echo ("</div>");
                                             echo("</div>");
                                        echo ("</div>");
                             }
-
                         }
                         else{
                             $results = $category->PrintSubCat($_GET['subcat']);
                             foreach($results as $rows)
                             {
-                                echo ("<div class='col-lg-4 col-sm-6'>");
-                                echo ("<div class='product-item product'>");
+                                echo ("<div class='col-lg-4 col-sm-6 sort'>");
+                                echo ("<div class='product-item product'data-name='" . $rows['name'] . "'data-price='" .$rows['price'] . "'>");
                                     echo ("<div class='pi-pic'>");
                                         echo ("<img src='../../products/" . $rows['id'] . "_1.jpg' height='300px' width='300px'>");
                                                    echo ("<div class='sale pp-sale'>Sale</div>");
@@ -185,7 +183,7 @@
                                                     echo ("</div>");
                                                     echo ("<ul>");
                                                        echo("<li class='w-icon active'><a href='#'><i class='icon_bag_alt'></i></a></li>");
-                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
+                                                       echo ("<li class='quick-view'><a href='#' class='quickview' data-id='" . $rows['id']. "' data-img='../../products/" . $rows['id'] . "_1.jpg'data-price='" . $rows['price']. "' data-name='" .$rows['name'] . "' data-toggle='modal' data-target='#exampleModal'>+ Quick View</a></li>");
                                                        echo ("<li class='w-icon'><a href='#'><i class='fa fa-random'></i></a></li>");
                                                   echo ("</ul>");
                                                 echo("</div>");
@@ -195,9 +193,8 @@
                                                    echo ("<a href='product.php?id=" . $rows['id'] . "'");
                                                    echo ("<h5 >" . $rows['name'] . "</h5>");
                                                   echo  ("</a>");
-                                                  echo ("<div class='product-price'>");
+                                                  echo ("<div class='product-price price' data-price='" .$rows['price'] . "'>$");
                                                   echo ($rows['price']);
-                                                  echo ("<span>$35.00</span>");
                                                    echo ("</div>");
                                                 echo ("</div>");
                                             echo("</div>");
@@ -214,6 +211,8 @@
                             <h5 class="modal-title" id="title"></h5>
                             <h5 class="modal-title" id="price"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button id="addToCart" data-id=<??> class="primary-btn pd-cart">Add To Cart</button>
+
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
