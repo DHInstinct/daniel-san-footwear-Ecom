@@ -37,25 +37,21 @@
                     <form action="#">
                         <div class="group-input">
                             <label for="username">Email address</label>
-                            <input type="text" id="username">
+                            <input required type="text" id="email" >
                         </div>
                         <div class="group-input">
                             <label for="fname">First name</label>
-                            <input type="text" id="fname">
+                            <input required type="text" id="fname">
                         </div>
                         <div class="group-input">
                             <label for="lname">Last name</label>
-                            <input type="text" id="lname">
+                            <input required type="text" id="lname">
                         </div>
                         <div class="group-input">
                             <label for="pass">Password</label>
-                            <input type="text" id="pass">
+                            <input required type="text" id="pass">
                         </div>
-                        <div class="group-input">
-                            <label for="con-pass">Confirm Password</label>
-                            <input type="text" id="con-pass">
-                        </div>
-                        <button type="submit" class="site-btn register-btn">REGISTER</button>
+                        <button type="submit" id='AddUser' class="site-btn register-btn">REGISTER</button>
                     </form>
                     <div class="switch-login">
                         <a href="./login.php" class="or-login">Or Login</a>

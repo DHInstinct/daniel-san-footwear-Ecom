@@ -11,7 +11,7 @@
     //handing product options.
      if($option != "No Option")
      {
-        $query = "select opt_ID, pro_ID from prodopt where opt_Value ='$option';";
+        $query = "select opt_ID, product.pro_ID from prodopt inner join product on product.pro_ID=prodopt.pro_ID where opt_Value ='$option';";
         $item = $cart->get_row($query);
 
         $where = array("cart_ID"=>session_id(), "opt_ID"=>$item[0], "pro_ID"=>$item[1]);

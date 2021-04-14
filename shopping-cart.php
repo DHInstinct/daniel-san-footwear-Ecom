@@ -35,6 +35,7 @@
                             <tr>
                                 <th>Image</th>
                                 <th class="p-name">Product Name</th>
+                                <th>Options</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
@@ -42,20 +43,32 @@
                         </thead>
                         <tbody>
                         <!-- js/ajax/updateCart.php -->
-                        
                             <?
+
                                 $CartItems = $cart->FillCart(session_id());
+                                /*
+                                Thought about doing the doing it this way, its just the query you used in class on Fri
+                                I tried implementing this function into the foreach and keeping track of its iterations
+                                if I just orderby by the same value in both of my queries that would technically give me 
+                                the correct order for options and cartITems? Maybe? ...anyways that way didn't really 
+                                workout.
+                                    $optionDetails = $cart->GetOptionDetails(session_id());
+                                
+                                */
 
                                 foreach($CartItems as $data)
                                 {
+                                    //echo(Product::GetImage($data['pro_ID']));
                                     echo("
                                         <tr>
                                         <td class='cart-pic first-row'><img src='" . Product::GetImage($data['pro_ID']) . "' alt=''></td>
                                         <td class='cart-title first-row'>
                                         <h5>" . $data['pro_Name'] . "</h5>
                                         </td>
+                                        <td>" . $data['opt_Value'] . "</td>
                                         <td class='p-price first-row'>$". number_format($data['pro_Price'], 2)."</td>
                                             <td class='qua-col first-row'>
+                                            
                                                 <div class='quantity'>
                                                     <div class='pro-qty'>
                                                         <input type='text' class='prodIDdata' data-id='" . $data['pro_ID']. "' value='" . $data['cart_qty'] . "'>

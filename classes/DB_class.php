@@ -283,7 +283,7 @@ class DB
      * Count number of rows found matching a specific query
      *
      * Example usage:
-     * $rows = $database->num_rows( "SELECT id FROM users WHERE user_id = 44" );
+     * $rows = $database->num_rows("SELECT id FROM users WHERE user_id = 44" );
      *
      * @access public
      * @param string

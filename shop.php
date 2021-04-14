@@ -209,10 +209,8 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="title"></h5>
-                            <h5 class="modal-title" id="price"></h5>
+                            <br />
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <button id="addToCart" data-id=<??> class="primary-btn pd-cart">Add To Cart</button>
-
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
@@ -220,6 +218,9 @@
                             <img id="img" src=''></img>
                           </div>
                           <div class="modal-footer">
+                          <p id='success'></p>
+                          $<b><h5 class="modal-title" id="price"></h5></b>
+                            <button id="addToCart" class='btn btn-warning pd-cart' data-id=<??> >Add To Cart</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           </div>
                         </div>

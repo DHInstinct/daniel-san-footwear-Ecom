@@ -20,9 +20,6 @@
 
     $cat = $category->GetMainCat();
 
-
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +46,9 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <!-- Light box css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css%22%3E">
+    <!-- fancy box css -->
+    <!-- <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <!-- Custom css -->
     <link rel="stylesheet" href="css/custom.css" type="text/css">
     
@@ -101,6 +99,7 @@
                                     <i class="icon_bag_alt"></i>
                                     <span></span>
                                 </a>
+                                
                                 <div class="cart-hover">
                                     <div class="select-items">
                                         <table>
@@ -176,6 +175,15 @@
                                 <li><a href="./login.php">Login</a></li>
                             </ul>
                         </li>
+                        <?
+                        echo(isset($_SESSION['userlogin']) 
+                        ? "</li><li><a href='logout.php'>Logout</a></li><li id='greeting'>Hello, " . $_SESSION['userlogin'] . ""
+                        : "<li><a href='./login.php'>Login</a></li>
+                            "                          
+                            );
+                        ?>
+
+
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

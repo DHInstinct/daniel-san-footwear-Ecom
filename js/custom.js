@@ -66,10 +66,23 @@ $(document).ready(function () {
         });
     });
 
+
+    /* This is basic - uses default settings */
+
+    // $("a#single_image").fancybox();
+    // $('.imagepopup').click(function () {
+    //     alert('hi').fancybox();
+    //     $('.imagepopup').fancybox();
+    //   });
+
+    /* Using custom settings */
+
     //hide the success/error message until the button is clicked
     $('.added').hide();
     //event listener for adding to cart
     $('#addToCart').click(function () {
+
+        $('#success').html("<b>Added To your cart!</b>")
 
         var option = $('.option').children('option:selected').data('option');
         // alert($('option').children());
@@ -177,16 +190,70 @@ $(document).ready(function () {
         );
     });
 
+
+    $('#AddUser').click(function () {
+
+        var email = $('#email').val();
+        var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var password = $('#pass').val();
+        
+        $.ajax(
+            {
+                url: "js/ajax/adduser.php",
+                data: { email: email, fname: fname, lname: lname, password: password },
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    // $('#title').html(data.name)
+                    // $('#price').html(data.price)
+                    // $('#img').attr("src", data.img)
+                    // $('#addToCart').attr("data-id", data.id)
+
+                },
+                error: function (data) {
+                    alert("error");
+                }
+            }
+        );
+        
+    });
+
+    //handing login
+    $('#login').click(function () {
+
+        var email = $('#emaillogin').val();
+        var password = $('#passlogin').val();
+        
+        $.ajax(
+            {
+                url: "js/ajax/processlogin.php",
+                data: { email: email, password: password },
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+
+                },
+                error: function (data) {
+                    alert("error");
+                }
+            }
+        );
+        
+    });
+
+
+
     //implementing tiny sort
 
     //https://stackoverflow.com/questions/8433691/sorting-list-of-elements-in-jquery
-    function getSorted(selector, attrName) {
-        return $($(selector).toArray().sort(function (a, b) {
-            var aVal = parseInt(a.getAttribute(attrName)),
-                bVal = parseInt(b.getAttribute(attrName));
-            return aVal - bVal;
-        }));
-    }
+    // function getSorted(selector, attrName) {
+    //     return $($(selector).toArray().sort(function (a, b) {
+    //         var aVal = parseInt(a.getAttribute(attrName)),
+    //             bVal = parseInt(b.getAttribute(attrName));
+    //         return aVal - bVal;
+    //     }));
+    // }
     //sorting price asc
     $('.sort-price-asc').click(function () {
         tinysort('div.sort>div', { data: 'price', order: 'asc' });

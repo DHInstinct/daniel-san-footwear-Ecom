@@ -71,24 +71,23 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="product-pic-zoom">
-                            <?
+                        <div class="">
+                         <?
 
                             if(count($images) == 1){
 
-                                echo "<img data-image=" . Product::GetImage($_GET['id']) . " class='product-big-img' src='../../products/" . $img . ".jpg' height='300px' width='300px'>";
+                                echo "<a href=" . Product::GetImage($_GET['id']) . " data-lightbox='photos'><img class='img-fluid' data-image=" . Product::GetImage($_GET['id']) . " class='product-big-img' src='".Product::GetImage($_GET['id']) ."' height='300px' width='300px'></a>";
                                 echo "<div class='product-thumbs'><div class='product-thumbs-track ps-slider owl-carousel'>";
                                 
                             }
                             else{
-                                echo "<img class='product-big-img' src='../../products/" . $img . ".jpg'>";
+                                echo "<a href='" .Product::GetImage($_GET['id']) ."'data-lightbox='photos'><img class='product-big-img' src='../../products/" . $img . ".jpg'></a>";
                                 echo "<div class='product-thumbs'><div class='product-thumbs-track ps-slider owl-carousel'>";
                                 foreach($images as $image)
                                 {
-                                    echo("<div class='pt active' data-imgbigurl=" . $image . "><img src=" . $image . " alt=''></div>");
+                                    echo("<div class='pt active' data-imgbigurl=" . $image . "><a href='".$image ."'data-lightbox='photos'><img src=" . $image . " alt=''></a></div>");
                                 }
                             }
-                            
                             ?>
                             </div> 
                          </div>
@@ -133,7 +132,8 @@
                                     
                                     ?>
                             </select>
-
+                            <!-- <a id="show-fancybox" href="images/waterfall.png">Show Fancybox</a>
+                            <a id="single_image" data-fancybox='gallery' href="../../products/25_1.jpg"><img src="../../products/25_1.jpg" alt=""/></a> -->
                             <!-- success message --> 
                                 <div class='added'><h3></h3></div>
                             </ul>
