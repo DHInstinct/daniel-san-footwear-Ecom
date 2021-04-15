@@ -20,6 +20,8 @@
 
     $cat = $category->GetMainCat();
 
+    var_dump($_SESSION);
+
 ?>
 
 <!DOCTYPE html>

@@ -11,14 +11,13 @@ require_once("../../config.php");
  
     $data = $customer->CheckCustomer($email, $password);
 
-    $response = [];
 
     if(!$data == 0)
     {
-        $response['message'] = "Success";
         $_SESSION['userlogin'] = $data[0]['cus_FirstName'];
-
-
+        $_SESSION['userid'] = $data[0]['cus_ID'];
+        //not working add in confromation that the user is loged in.
+        //header('location: index.php');
     }    
     echo json_encode($data);
     

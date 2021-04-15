@@ -242,6 +242,32 @@ $(document).ready(function () {
         
     });
 
+    //adding address
+    $('#addAddress').click(function (){
+        // address variables
+        var street = $('#street').val(); 
+        var zip = $('#zip').val(); 
+        var town = $('#town').val(); 
+        var state = $('#state').val(); 
+
+        //ajax call
+        $.ajax({
+            url: 'js/ajax/addAddress.php',
+            data:{street: street, zip: zip, town: town, state: state},
+            method: 'post',
+            dataType: 'json',
+
+            success: function (data){
+                alert('Success');
+            }, 
+
+            error: function (data){
+                alert('Error adding address.');
+            }
+        });
+        
+    });
+
 
 
     //implementing tiny sort

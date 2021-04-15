@@ -18,46 +18,57 @@ class Cart
     public function CalculateTotal($cartID)
     {
 
-        $query = "select cart_ID, sum(cart_qty*pro_price) as'Total' FROM cit410s21.cart inner join product on product.pro_ID=cart.pro_ID where cart_ID='$cartID' group by cart_ID;";
-        $results = $this->db->get_results($query);
+        // $query = "select cart_ID, sum(cart_qty*pro_price) as'Total' FROM cit410s21.cart inner join product on product.pro_ID=cart.pro_ID where cart_ID='$cartID' group by cart_ID;";
+        // $results = $this->db->get_results($query);
         
-        return $results[0]['Total'];
+        // return $results[0]['Total'];
+
+        $query = "select cart_qty, pro_price BASEPRICE, (select opt_Price from prodopt po, cartopts co, cart c where c.pro_ID=po.pro_ID and co.opt_ID=po.opt_ID and c.cart_ID=co.cart_ID and c.pro_ID=p.pro_ID and c.cart_ID='$cartID') OPTPRICE FROM cart INNER JOIN product p ON p.pro_ID=cart.pro_ID and cart_ID='$cartID'";
+        $results = $this->db->get_results($query);
+
+        $totalPrice = 0;
+        foreach ($results as $value)
+        {
+          $totalPrice += $value['cart_qty'] * ($value['BASEPRICE'] + $value['OPTPRICE']);
+        } 
+
+        return $totalPrice;
     }
 
     public function FillCart($cartID)
     {
-        /*
-        **Worked With Tyler**
-
-        For some reason I cannot figure out the query. Here's my work. 
-        Spent all of friday trying to get this.
+        $query = "select c.pro_ID pro_ID, c.cart_qty cart_qty, co.opt_ID opt_ID FROM CART c LEFT JOIN CARTOPTS co on co.cart_ID=c.cart_ID and co.pro_ID=c.pro_ID where c.cart_ID='$cartID'";
         
-        $query = "select * FROM cit410s21.cart inner join product on product.pro_ID=cart.pro_ID left join prodopt on cart.pro_ID=prodopt.pro_ID where cart_ID='$cartID'";
-        $query = "select * FROM CART c LEFT JOIN CARTOPTS co on co.cart_ID=c.cart_ID and co.pro_ID=c.pro_ID LEFT join prodopt on co.opt_ID=prodopt.opt_ID where c.cart_ID='$cartID' order by c.pro_ID";
-        $query = "select * from cart inner join product on product.pro_id = cart.pro_ID where cart_ID = '$cartID'";
+        $result = $this->db->get_results($query);
         
-        $query = "select prodopt.opt_ID, prodopt.opt_Price, cart.pro_ID, cart.cart_qty, product.pro_Price, product.pro_Name, prodopt.opt_Value from cart 
-            inner join product on product.pro_id = cart.pro_ID 
-            inner join cartopts on cartopts.cart_ID=cart.cart_ID
-            left outer join prodopt on prodopt.opt_ID = cartopts.opt_ID 
-            where cart.cart_ID = '$cartID'
-            group by prodopt.opt_ID ";
+        foreach($result as $data)
+        {
+            
+            $query = "select * FROM product p LEFT JOIN prodopt po ON p.pro_ID=po.pro_ID WHERE p.pro_ID=" . $data['pro_ID'] . " and po.opt_ID" . (!empty($data['opt_ID']) ? "=" . $data['opt_ID'] : " IS NULL");
+            $results = $this->db->get_results($query);
 
-        I felt like I was really close on this one, but still not what I was looking for. 
-         select * from cart natural join product
-             left outer join cartopts on cartopts.cart_ID = cart.cart_ID 
-             where cart.cart_ID='$cartID'
-             in(select opt_Price from prodopt)
-             group by product.pro_ID
-        
-        */
+            //echo(Product::GetImage($data['pro_ID']));
+            foreach($results as $data2)
+            echo("
+                <tr>
+                <td class='cart-pic first-row'><img src='" . Product::GetImage($data['pro_ID']) . "' alt=''></td>
+                <td class='cart-title first-row'>
+                <h5>" . $data2['pro_Name'] . "</h5>
+                </td>
+                <td>" . $data2['opt_Value'] . "</td>
+                <td class='p-price first-row'>$". number_format($data2['pro_Price'], 2)."</td>
+                    <td class='qua-col first-row'>
 
-        
-        // originial query
-        $query = "select * FROM cit410s21.cart inner join product on product.pro_ID=cart.pro_ID where cart.cart_ID='$cartID'";
-        $results = $this->db->get_results($query);
-
-        return $results;
+                        <div class='quantity'>
+                            <div class='pro-qty'>
+                                <input type='text' class='prodIDdata' data-id='" . $data['pro_ID']. "' value='" . $data['cart_qty'] . "'>
+                            </div>
+                        </div>
+                    </td>
+                <td class='total-price first-row'>$" .number_format($data['cart_qty'] * $data2['pro_Price'], 2) . "</td>
+                </tr>
+                ");
+        }
     }
 
     public function UpdateMiniCart($cartID)
@@ -105,5 +116,26 @@ class Cart
             }
         }
     }
+
+
+    public function FillOrderSummary($cartID)
+    {
+        $query = "select c.pro_ID pro_ID, c.cart_qty cart_qty, co.opt_ID opt_ID FROM CART c LEFT JOIN CARTOPTS co on co.cart_ID=c.cart_ID and co.pro_ID=c.pro_ID where c.cart_ID='$cartID'";
+        
+        $result = $this->db->get_results($query);
+
+        foreach($result as $data)
+        {
+            $query = "select * FROM product p LEFT JOIN prodopt po ON p.pro_ID=po.pro_ID WHERE p.pro_ID=" . $data['pro_ID'] . " and po.opt_ID" . (!empty($data['opt_ID']) ? "=" . $data['opt_ID'] : " IS NULL");
+            $results = $this->db->get_results($query);
+            foreach($results as $data2)
+            {
+                echo("
+                    <li>" . $data2['pro_Name'] . $data2['opt_Value']. "<span>$" . $data2['pro_Price'] . "</span></li>
+                ");
+            }
+        }
+    }
+ // " . $data2['opt_Value'] . "
 }
 ?>

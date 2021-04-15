@@ -17,12 +17,12 @@
                     <h2>Login</h2>
                     <form action="#">
                         <div class="group-input">
-                            <label for="username">Username or email address *</label>
-                            <input required type="text" id="emaillogin">
+                            <label for="username"></label>
+                            <input required type="text" id="emaillogin"type="email" class="form-control" placeholder="Email">
                         </div>
                         <div class="group-input">
-                            <label for="pass">Password *</label>
-                            <input required type="text" id="passlogin">
+                            <label for="pass"></label>
+                            <input required type="password" id="passlogin"type="password" class="form-control" placeholder="Password">
                         </div>
                         <button type="submit" id='login' class="site-btn login-btn">Sign In</button>
                     </form>

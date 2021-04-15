@@ -44,6 +44,23 @@ class Customer {
         }
     }
 
+    public function AddAddress($cus_ID, $street, $city, $state, $zip)
+    {
+        $address = array(
+            'cus_ID'=> $cus_ID,
+            'add_Street'=> $street,
+            'add_City'=> $city,
+            'add_State'=> $state,
+            'add_Zip'=>$zip
+        );
+
+        $this->db->insert('cit410s21.address', $address);
+
+        return $address;
+
+
+    }
+
 }
 
 ?>

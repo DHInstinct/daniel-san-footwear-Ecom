@@ -1,5 +1,7 @@
 <?
     require_once("header.php");
+
+    $cart = new Cart();
 ?>
 
 <!-- Breadcrumb Section Begin -->
@@ -23,61 +25,48 @@
     <div class="container">
         <form action="#" class="checkout-form">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div class="checkout-content">
-                        <a href="login.php" class="content-btn">Click Here To Login</a>
+                        <a id='getAddress' class="content-btn">Click Here To View Addresses</a>
                     </div>
                     <h4>Biiling Details</h4>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <!-- <div class="col-lg-6">
                             <label for="fir">First Name<span>*</span></label>
-                            <input type="text" id="fir">
+                            <input type="text" placeholder='First Name'id="first">
                         </div>
                         <div class="col-lg-6">
                             <label for="last">Last Name<span>*</span></label>
-                            <input type="text" id="last">
-                        </div>
-                        <div class="col-lg-12">
-                            <label for="cun-name">Company Name</label>
-                            <input type="text" id="cun-name">
-                        </div>
-                        <div class="col-lg-12">
-                            <label for="cun">Country<span>*</span></label>
-                            <input type="text" id="cun">
-                        </div>
+                            <input type="text" placeholder='Last Name'id="last">
+                        </div> -->
                         <div class="col-lg-12">
                             <label for="street">Street Address<span>*</span></label>
                             <input type="text" id="street" class="street-first">
                             <input type="text">
                         </div>
                         <div class="col-lg-12">
-                            <label for="zip">Postcode / ZIP (optional)</label>
+                            <label required for="zip">Postcode / ZIP (optional)</label>
                             <input type="text" id="zip">
                         </div>
-                        <div class="col-lg-12">
-                            <label for="town">Town / City<span>*</span></label>
+                        <div class="col-lg-6">
+                            <label required for="town">Town / City<span>*</span></label>
                             <input type="text" id="town">
                         </div>
                         <div class="col-lg-6">
-                            <label for="email">Email Address<span>*</span></label>
-                            <input type="text" id="email">
+                            <label required for="town">State<span>*</span></label>
+                            <input type="text" id="state">
                         </div>
-                        <div class="col-lg-6">
-                            <label for="phone">Phone<span>*</span></label>
-                            <input type="text" id="phone">
-                        </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <div class="create-item">
-                                <label for="acc-create">
-                                    Create an account?
-                                    <input type="checkbox" id="acc-create">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <button id='confirmAddress'class='btn btn-warning'>Confirm Address</button>
+                                <br />
+                                <br />
+                                <button id='addAddress'class='btn btn-warning'>Add Address? Click me To add it!</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="checkout-content">
                         <input type="text" placeholder="Enter Your Coupon Code">
                     </div>
@@ -86,27 +75,29 @@
                         <div class="order-total">
                             <ul class="order-table">
                                 <li>Product <span>Total</span></li>
-                                <li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                <li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                <li class="fw-normal">Combination x 1 <span>$120.00</span></li>
-                                <li class="fw-normal">Subtotal <span>$240.00</span></li>
-                                <li class="total-price">Total <span>$240.00</span></li>
+                                
+                                <?
+                                    echo($cart->FillOrderSummary(session_id()));
+                                ?>
+                                <li class="fw-normal">Subtotal <span>$<?echo(number_format($cart->CalculateTotal(session_id()), 2));?></span></li>
+                                <li class="fw-normal">Shipping <span>$<?echo('Not done yet');?></span></li>
+                                <li class="total-price">Total <span>$<?echo(number_format($cart->CalculateTotal(session_id()), 2));?></span></li>
                             </ul>
                             <div class="payment-check">
-                                <div class="pc-item">
+                                <!-- <div class="pc-item">
                                     <label for="pc-check">
-                                        Cheque Payment
+                                       Something could go right here?
                                         <input type="checkbox" id="pc-check">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="pc-item">
                                     <label for="pc-paypal">
-                                        Paypal
+                                    Something could go right here?
                                         <input type="checkbox" id="pc-paypal">
                                         <span class="checkmark"></span>
                                     </label>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="order-btn">
                                 <button type="submit" class="site-btn place-btn">Place Order</button>
