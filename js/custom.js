@@ -232,7 +232,7 @@ $(document).ready(function () {
                 method: 'post',
                 dataType: 'json',
                 success: function (data) {
-
+                    // add confromation that they logged in
                 },
                 error: function (data) {
                     alert("error");

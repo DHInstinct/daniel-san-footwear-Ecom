@@ -40,6 +40,7 @@ class Cart
         $query = "select c.pro_ID pro_ID, c.cart_qty cart_qty, co.opt_ID opt_ID FROM CART c LEFT JOIN CARTOPTS co on co.cart_ID=c.cart_ID and co.pro_ID=c.pro_ID where c.cart_ID='$cartID'";
         
         $result = $this->db->get_results($query);
+
         
         foreach($result as $data)
         {
