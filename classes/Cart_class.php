@@ -137,6 +137,17 @@ class Cart
             }
         }
     }
- // " . $data2['opt_Value'] . "
+
+
+    //weight function that calculates the total weight of a cart to pass into UPS api
+    public function CartWeight($cartID)
+    {
+        $query = "select sum(product.pro_Weight * cart.cart_qty) as TotalWeight  from cart inner join product on cart.pro_ID=product.pro_ID where cart_ID='$cartID'";
+
+        $results = $this->db->get_results($query);
+         
+        return $results[0]['TotalWeight'];
+    }
+
 }
 ?>

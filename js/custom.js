@@ -197,7 +197,7 @@ $(document).ready(function () {
         var fname = $('#fname').val();
         var lname = $('#lname').val();
         var password = $('#pass').val();
-        
+
         $.ajax(
             {
                 url: "js/ajax/adduser.php",
@@ -216,7 +216,7 @@ $(document).ready(function () {
                 }
             }
         );
-        
+
     });
 
     //handing login
@@ -224,7 +224,7 @@ $(document).ready(function () {
 
         var email = $('#emaillogin').val();
         var password = $('#passlogin').val();
-        
+
         $.ajax(
             {
                 url: "js/ajax/processlogin.php",
@@ -239,33 +239,70 @@ $(document).ready(function () {
                 }
             }
         );
-        
+
     });
 
     //adding address
-    $('#addAddress').click(function (){
+    $('#addAddress').click(function () {
         // address variables
-        var street = $('#street').val(); 
-        var zip = $('#zip').val(); 
-        var town = $('#town').val(); 
-        var state = $('#state').val(); 
+        var street = $('#street').val();
+        var zip = $('#zip').val();
+        var town = $('#town').val();
+        var state = $('#state').val();
 
         //ajax call
         $.ajax({
             url: 'js/ajax/addAddress.php',
-            data:{street: street, zip: zip, town: town, state: state},
+            data: { street: street, zip: zip, town: town, state: state },
             method: 'post',
             dataType: 'json',
 
-            success: function (data){
+            success: function (data) {
                 alert('Success');
-            }, 
+            },
 
-            error: function (data){
+            error: function (data) {
                 alert('Error adding address.');
             }
         });
-        
+
+    });
+
+    //checking address with api ajax call.
+    $('#confirmAddress').click(function (e) {
+        // address variables
+
+        e.preventDefault();
+        var zip = $('#zip').val();
+        var weight = $('#weight').html();
+
+        $.ajax({
+            url: 'js/ajax/shipping.php',
+            data: { zip: zip, weight: weight },
+            method: 'post',
+            dataType: 'json',
+
+            success: function (data) {
+                //updating ups shipping cost field
+                $('#calculatedTotal').append(data);
+
+                //fixing total price
+                total = $('#totalprice').html();
+                total = total.replace('$', '');
+                shipping = parseFloat(data)
+                Total = parseFloat(total);
+
+                final = Total += shipping
+
+                $('#totalprice').html('$');
+                $('#totalprice').append(final);
+            },
+
+            error: function (data) {
+                alert('Error Confirming address');
+            }
+        });
+
     });
 
 

@@ -61,6 +61,12 @@ a:hover {
   padding-left: 20px;
 }
 
+.col-lg-6{
+  /* width | style | color */
+  /* border: 5px solid #e7ab3c */
+}
+
+
 /* CSS for clicking on photo */
 .photo-gallery {
   color: #313437;
