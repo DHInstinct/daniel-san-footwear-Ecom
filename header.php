@@ -22,6 +22,9 @@
 
     var_dump($_SESSION);
 
+
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +52,6 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <!-- fancy box css -->
-    <!-- <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <!-- Custom css -->
     <link rel="stylesheet" href="css/custom.css" type="text/css">
@@ -134,7 +136,7 @@
                                     </div>
                                     <div class="select-button">
                                         <a href="shopping-cart.php" class="primary-btn view-card">VIEW CART</a>
-                                        <a href="check-out.php" class="primary-btn checkout-btn">CHECK OUT</a>
+                                        <a href="check-out.fphp" class="primary-btn checkout-btn">CHECK OUT</a>
                                     </div>
                                 </div>
                             </li>
@@ -164,11 +166,11 @@
                     <ul>
                         <li class="active"><a href="./index.php">Home</a></li>
                         <li><a href="./shop.php">Shop</a></li>
-                        <li><a href="#">Collection</a>
+                        <!-- <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Men's Footwear</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="./shopping-cart.php">Shopping Cart</a></li>

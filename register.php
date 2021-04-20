@@ -3,30 +3,6 @@
    require_once("config.php");
 ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fashi | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-
 <!-- Register Section Begin -->
 <div class="register-login-section spad">
     <div class="container">
@@ -35,21 +11,21 @@
                 <div class="register-form">
                     <h2>Register</h2>
                     <form action="#">
-                        <div class="group-input">
-                            <label for="username">Email address</label>
-                            <input required type="text" id="email" >
+                         <div class="group-input form-label-group">
+                            <input class='form-control' required placeholder='Email' type="text" id="email">
+                            <label for="username">Email</label>
                         </div>
-                        <div class="group-input">
+                        <div class="group-input form-label-group">
+                            <input class='form-control' placeholder='First Name' required type="text" id="fname">
                             <label for="fname">First name</label>
-                            <input required type="text" id="fname">
                         </div>
-                        <div class="group-input">
+                        <div class="group-input form-label-group">
+                            <input class='form-control' placeholder='Last Name' required type="text" id="lname">
                             <label for="lname">Last name</label>
-                            <input required type="text" id="lname">
                         </div>
-                        <div class="group-input">
+                        <div class="group-input form-label-group">
+                            <input class='form-control' placeholder='Password' required type="text" id="pass">
                             <label for="pass">Password</label>
-                            <input required type="text" id="pass">
                         </div>
                         <button type="submit" id='AddUser' class="site-btn register-btn">REGISTER</button>
                     </form>
@@ -58,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            <div class='registarConfirm'></div>
         </div>
     </div>
 </div>

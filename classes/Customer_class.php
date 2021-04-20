@@ -57,8 +57,40 @@ class Customer {
         $this->db->insert('cit410s21.address', $address);
 
         return $address;
+    }
 
+    public function GetAddress($cus_ID)
+    {
+        $query = "select * from address where cus_ID='$cus_ID'";
 
+        $data = $this->db->get_results($query);
+        return $data;
+    }
+
+    public function AddCard($carNum, $carName, $carExp, $carSec, $cus_ID, $add_ID)
+    {
+        $card = array(
+            'cus_ID'=> $cus_ID,
+            'car_Name'=> $carNum,
+            'car_Num'=> $carName,
+            'car_Exp'=> $carExp,
+            'car_Sec'=>$carSec, 
+            'car_Active'=> 'T',
+            'add_ID'=> $add_ID
+        );
+
+        $this->db->insert('cit410s21.card', $card);
+
+        return $card;
+    }
+   
+
+    public function GetCardAddress($cus_ID)
+    {
+        $query = "select * from address a inner join card c on a.add_ID=c.add_ID where a.cus_ID = '$cus_ID'";
+        $results = $this->db->get_results($query);
+
+        return $results;
     }
 
 }

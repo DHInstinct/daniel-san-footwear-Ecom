@@ -8,10 +8,6 @@ $database = new DB();
 $review = new Review();
 
 
-    //these are for later :)
-    // $name = htmlspecialchars(trim($_POST['name']));
-    // $email = htmlspecialchars(trim($_POST['email']));
-    
     $message = htmlspecialchars(trim($_POST['message']));
     $score = htmlspecialchars(trim($_POST['score']));
     $prodID = htmlspecialchars(trim($_POST['prodID']));

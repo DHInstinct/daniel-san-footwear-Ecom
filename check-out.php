@@ -1,8 +1,29 @@
-<?
+<?php
+    session_start();
+
     require_once("header.php");
+    if(!isset($_SESSION['userid'])){
+        // ob_start();
+        //header("location: http:// " .$_SERVER['HTTP_HOST'] . "/index.php");
+        // HEADER IS NOT WORKING AHHHHHHHHHHHHHH
+        // echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
+    }
 
     $cart = new Cart();
+    $customer = new Customer();
+
+    
 ?>
+
+<!-- <br />
+<br />
+<br />
+<br />
+<br />
+<div class="form-label-group">
+  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputEmail">Email address</label>
+</div> -->
 
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -19,84 +40,93 @@
     </div>
 </div>
 <!-- Breadcrumb Section Begin -->
-
+                
 <!-- Shopping Cart Section Begin -->
 <section class="checkout-section spad">
     <div class="container">
         <form action="#" class="checkout-form">
             <div class="row">
             <div class="checkout-content col-lg-12">
-                        <a id='getAddress' class="content-btn">Click Here To View Addresses</a>
+                        <?
+                        if(isset($_SESSION['userid'])){
+
+
+                            $results = $customer->GetCardAddress($_SESSION['userid']);
+                            
+                            echo("<div class='addstyle'><a id='getAddress' class='content-btn'><h2>Addresses and Cards</h2></a></div>");
+                            foreach($results as $result)
+                            {
+                                echo("<div class='col-lg-4 addstyle'><a data-carid='".  $result['car_ID'] ."' data-addid='".  $result['add_ID'] ."' data-cvv='".  $result['car_Sec'] ."' data-month='".  $result['car_Exp'] ."' data-cnum='".  $result['car_Num'] ."' data-carname='".  $result['car_Name'] ."' data-state='".  $result['add_State'] ."' data-town='".  $result['add_City'] ."' data-zip='".  $result['add_Zip'] ."' data-street='" .  $result['add_Street'] ."' href='#' id='fillCard'>" ."<strong>Street: </strong>" .  $result['add_Street'] ."<br /><strong>Card Num:</strong> ". $result['car_Num'] . "</a>");
+                                echo('</div>');
+                            }
+                        }
+                        ?>
                     </div>
                 <div class="col-lg-6">
                     <h4>Biiling and Shipping Details</h4>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-label-group">
+                            <input required type="text" placeholder='First Name'id="first">
                             <label for="fir">First Name<span>*</span></label>
-                            <input type="text" placeholder='First Name'id="first">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-label-group">
+                            <input required type="text" placeholder='Last Name'id="last">
                             <label for="last">Last Name<span>*</span></label>
-                            <input type="text" placeholder='Last Name'id="last">
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 form-label-group">
+                            <input required type="text" id="street" placeholder='Street' class="street-first">
                             <label for="street">Street Address<span>*</span></label>
-                            <input type="text" id="street" class="street-first">
                             <input type="text">
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 form-label-group">
+                            <input type="text" placeholder='Zip'id="zip">
                             <label required for="zip">Postcode / ZIP (optional)</label>
-                            <input type="text" id="zip">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-label-group">
+                            <input type="text" placeholder='Town' id="town">
                             <label required for="town">Town / City<span>*</span></label>
-                            <input type="text" id="town">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 form-label-group">
+                            <input type="text" placeholder='State' id="state">
                             <label required for="town">State<span>*</span></label>
-                            <input type="text" id="state">
                         </div>
+                        <input type="hidden" id="addid">
+                        <input type="hidden" id="carid">
+
                         <div class="col-lg-8">
                             <div class="create-item">
-                                <button id='confirmAddress'class='btn btn-warning'>Confirm Address</button>
-                                <br />
-                                <br />
-                                <button id='addAddress'class='btn btn-warning'>Add Address? Click me To add it!</button>
+                                <button id='confirmAddress'class='btn btn-warning'>Calculate Shipping</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <h4>Card Payment</h4>
-                    <div class="row">
-                    <div id="credit-card" class="tab-pane fade show active pt-3">
-                            <form role="form" onsubmit="event.preventDefault()">
-                                <div class="form-group"> <label for="username">
-                                        <h6>Card Owner</h6>
-                                    </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
-                                <div class="form-group"> <label for="cardNumber">
-                                        <h6>Card number</h6>
-                                    </label>
-                                    <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                        <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
-                                    </div>
+                        <div class="row">
+                            <div id="credit-card">
+                                <div class="form-label-group"> 
+                                    <input type="text" name="username" id='cardname' placeholder="MasterCard" required> 
+                                    <label for="username">Card Name</label> 
+                                </div>
+                                <div class="form-group form-label-group">
+                                    <input type="text" name="cardNumber" id='cardnum' placeholder="xxxx-xxxx-xxxx-xxxx" class="form-control " required>
+                                    <label for="cardNumber">Card number</label>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8">
-                                        <div class="form-group"> <label><span class="hidden-xs">
-                                                    <h6>Expiration Date</h6>
-                                                </span></label>
-                                            <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
-                                        </div>
+                                    <div class="form-group form-label-group">
+                                        <input type="text" placeholder="MM Feb YY" name="" id='mm' class="form-control" required> 
+                                        <label>Expiration Date</label>
+                                    </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                            </label> <input type="text" required class="form-control"> </div>
+                                        <div class="form-label-group"> 
+                                            <input required type="text" id='cvv' placeholder='xxx'class="form-control"> 
+                                            <label>CVV</label>
+                                        </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer"> <button type="button" class="subscribe btn btn-warning btn-block shadow-sm"> Confirm Payment </button>
-                                </form>
+                                <div class="card-footer"> <button type="submit" id='payment' class=" addAddress subscribe btn btn-warning btn-block shadow-sm"> Add Payment and Address </button>
                             </div>
                             </div>
                         </div>
@@ -136,9 +166,10 @@
                                 </div> -->
                             </div>
                             <div class="order-btn">
-                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                                <button href=''type="submit" id='checkoutbtn' class="site-btn place-btn">Place Order</button>
                             </div>
                         </div>
+                        <div class='placedOrder col-lg-12 text-center'><h1>PLACED ORDER</h1></div>
                     </div>
                 </div>
             </div>

@@ -71,7 +71,7 @@
                                 <li class="subtotal">Subtotal <span></span></li>
                                 <li class="cart-total">Total <span>$<?echo(number_format($cart->CalculateTotal(session_id()), 2));?></span></li>
                             </ul>
-                            <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                            <a href="check-out.php" class="proceed-btn">PROCEED TO CHECK OUT</a>
                         </div>
                     </div>
                 </div>

@@ -184,7 +184,7 @@ $(document).ready(function () {
 
                 },
                 error: function (data) {
-                    alert("error");
+                    alert("error quick view");
                 }
             }
         );
@@ -205,14 +205,11 @@ $(document).ready(function () {
                 method: 'post',
                 dataType: 'json',
                 success: function (data) {
-                    // $('#title').html(data.name)
-                    // $('#price').html(data.price)
-                    // $('#img').attr("src", data.img)
-                    // $('#addToCart').attr("data-id", data.id)
-
+                    $('.registarConfirm').html("<script type='text/javascript'> document.location = 'login.php'; </script>");
                 },
                 error: function (data) {
-                    alert("error");
+                    $('.registarConfirm').html("<div class='text-center'><h3>Unable to registar Please Try again!</h3></div>");
+
                 }
             }
         );
@@ -220,7 +217,9 @@ $(document).ready(function () {
     });
 
     //handing login
-    $('#login').click(function () {
+    $('#login').click(function (e) {
+
+        e.preventDefault();
 
         var email = $('#emaillogin').val();
         var password = $('#passlogin').val();
@@ -233,27 +232,40 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (data) {
                     // add confromation that they logged in
+                    $('.loginError').html("<script type='text/javascript'> document.location = 'index.php'; </script>");
+
                 },
                 error: function (data) {
-                    alert("error");
+                    $('.loginError').html("<div class='text-center'><h3>Invalid Username/password. Please Try again!</h3></div>");
                 }
             }
         );
-
     });
 
     //adding address
-    $('#addAddress').click(function () {
+    $('.addAddress').on("click", function (e) {
         // address variables
+
+        e.preventDefault();
+
+
         var street = $('#street').val();
         var zip = $('#zip').val();
         var town = $('#town').val();
         var state = $('#state').val();
 
+        //card variables 
+        var cardname = $('#cardname').val()
+        var cardNum = $('#cardnum').val()
+        var mm = $('#mm').val()
+        var cvv = $('#cvv').val()
+
+
+
         //ajax call
         $.ajax({
             url: 'js/ajax/addAddress.php',
-            data: { street: street, zip: zip, town: town, state: state },
+            data: { street: street, zip: zip, town: town, state: state, cardname: cardname, cardNum: cardNum, mm: mm, cvv: cvv },
             method: 'post',
             dataType: 'json',
 
@@ -262,14 +274,16 @@ $(document).ready(function () {
             },
 
             error: function (data) {
-                alert('Error adding address.');
+                alert('Error adding address or Card.');
             }
         });
 
     });
 
+    $('#checkoutbtn').hide();
+
     //checking address with api ajax call.
-    $('#confirmAddress').click(function (e) {
+    $('#confirmAddress').on("click", function (e) {
         // address variables
 
         e.preventDefault();
@@ -285,6 +299,8 @@ $(document).ready(function () {
             success: function (data) {
                 //updating ups shipping cost field
                 $('#calculatedTotal').append(data);
+                $('#checkoutbtn').show();
+
 
                 //fixing total price
                 total = $('#totalprice').html();
@@ -293,6 +309,8 @@ $(document).ready(function () {
                 Total = parseFloat(total);
 
                 final = Total += shipping
+
+                final = final.toFixed(2);
 
                 $('#totalprice').html('$');
                 $('#totalprice').append(final);
@@ -305,7 +323,51 @@ $(document).ready(function () {
 
     });
 
+    $('.placedOrder').hide();
+    //placing order 
+    $('#checkoutbtn').click(function () {
 
+        //variables for order 
+        var shippingAddID = $('#addid').val();
+        var billingAddID = $('#addid').val();
+        var cardID = $('#carid').val();
+        var orderShip = $('#calculatedTotal').html();
+
+        //ignoring dollar sign
+        orderShip = orderShip.replace('$', '')
+
+        $.ajax({
+            url: 'js/ajax/placeorder.php',
+            method: 'post',
+            data: { shippingAddID: shippingAddID, billingAddID: billingAddID, cardID: cardID, orderShip: orderShip },
+            dataType: 'json',
+            success: function (data) {
+                alert("Success Order placed.");
+                $('.placedOrder').show();
+            },
+            error: function (data) {
+                alert("Error");
+            }
+        });
+
+    });
+
+
+    //filling address form and card form on click
+    $('#fillCard').click(function () {
+        // alert('Filling Card');
+
+        $('#street').val($(this).data('street'));
+        $('#zip').val($(this).data('zip'));
+        $('#town').val($(this).data('town'));
+        $('#state').val($(this).data('state'));
+        $('#cardname').val($(this).data('carname'));
+        $('#cardnum').val($(this).data('cnum'));
+        $('#mm').val($(this).data('month'));
+        $('#cvv').val($(this).data('cvv'));
+        $('#addid').val($(this).data('addid'));
+        $('#carid').val($(this).data('carid'));
+    });
 
     //implementing tiny sort
 
