@@ -53,10 +53,10 @@
 
                             $results = $customer->GetCardAddress($_SESSION['userid']);
                             
-                            echo("<div class='addstyle'><a id='getAddress' class='content-btn'><h2>Addresses and Cards</h2></a></div>");
+                            echo("<div class=' addstyle'><a id='getAddress' class='content-btn'><h2>Addresses and Cards</h2></a></div>");
                             foreach($results as $result)
                             {
-                                echo("<div class='col-lg-4 addstyle'><a data-carid='".  $result['car_ID'] ."' data-addid='".  $result['add_ID'] ."' data-cvv='".  $result['car_Sec'] ."' data-month='".  $result['car_Exp'] ."' data-cnum='".  $result['car_Num'] ."' data-carname='".  $result['car_Name'] ."' data-state='".  $result['add_State'] ."' data-town='".  $result['add_City'] ."' data-zip='".  $result['add_Zip'] ."' data-street='" .  $result['add_Street'] ."' href='#' id='fillCard'>" ."<strong>Street: </strong>" .  $result['add_Street'] ."<br /><strong>Card Num:</strong> ". $result['car_Num'] . "</a>");
+                                echo("<div class='text-center col-lg-12 addstyle'><a data-carid='".  $result['car_ID'] ."' data-addid='".  $result['add_ID'] ."' data-cvv='".  $result['car_Sec'] ."' data-month='".  $result['car_Exp'] ."' data-cnum='".  $result['car_Num'] ."' data-carname='".  $result['car_Name'] ."' data-state='".  $result['add_State'] ."' data-town='".  $result['add_City'] ."' data-zip='".  $result['add_Zip'] ."' data-street='" .  $result['add_Street'] ."' href='#' id='fillCard'>" ."<strong>Street: </strong>" .  $result['add_Street'] ."<br /><strong>Card Num:</strong> ". $result['car_Num'] . "</a>");
                                 echo('</div>');
                             }
                         }
@@ -66,11 +66,11 @@
                     <h4>Biiling and Shipping Details</h4>
                     <div class="row">
                         <div class="col-lg-6 form-label-group">
-                            <input required type="text" placeholder='First Name'id="first">
+                            <input type="text" placeholder='First Name'id="first">
                             <label for="fir">First Name<span>*</span></label>
                         </div>
                         <div class="col-lg-6 form-label-group">
-                            <input required type="text" placeholder='Last Name'id="last">
+                            <input type="text" placeholder='Last Name'id="last">
                             <label for="last">Last Name<span>*</span></label>
                         </div>
                         <div class="col-lg-12 form-label-group">
@@ -149,27 +149,21 @@
                                 <li class="fw-normal">UPS Ground Shipping <span id='calculatedTotal'>$</span></li>
                                 <li class="total-price">Total <span id='totalprice'>$<?echo(number_format($cart->CalculateTotal(session_id()), 2));?></span></li>
                             </ul>
-                            <div class="payment-check">
-                                <!-- <div class="pc-item">
-                                    <label for="pc-check">
-                                       Something could go right here?
-                                        <input type="checkbox" id="pc-check">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="pc-item">
-                                    <label for="pc-paypal">
-                                    Something could go right here?
-                                        <input type="checkbox" id="pc-paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> -->
-                            </div>
                             <div class="order-btn">
-                                <button href=''type="submit" id='checkoutbtn' class="site-btn place-btn">Place Order</button>
+                                <button href='#' type="submit" id='checkoutbtn' class="site-btn place-btn">Place Order</button>
                             </div>
                         </div>
-                        <div class='placedOrder col-lg-12 text-center'><h1>PLACED ORDER</h1></div>
+                        <div class='placedOrder checkout-content col-lg-12 text-center'>
+                            <a id="getAddress" class="content-btn">
+                                <h2>Your Order is on the way!</h2>
+                                <h3 id='tracking'>Tracking Number:</h3>
+                            </a>
+                        </div>
+                        <div class='errorOrder checkout-content col-lg-12 text-center'>
+                            <a id="getAddress" class="content-btn">
+                                <h2>Something went wrong. Please Try again later!</h2>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

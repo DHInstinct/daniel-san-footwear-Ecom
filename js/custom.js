@@ -324,9 +324,11 @@ $(document).ready(function () {
     });
 
     $('.placedOrder').hide();
+    $('.errorOrder').hide();
     //placing order 
-    $('#checkoutbtn').click(function () {
+    $('#checkoutbtn').click(function (e) {
 
+        e.preventDefault();
         //variables for order 
         var shippingAddID = $('#addid').val();
         var billingAddID = $('#addid').val();
@@ -342,11 +344,11 @@ $(document).ready(function () {
             data: { shippingAddID: shippingAddID, billingAddID: billingAddID, cardID: cardID, orderShip: orderShip },
             dataType: 'json',
             success: function (data) {
-                alert("Success Order placed.");
-                $('.placedOrder').show();
+                $('.placedOrder').fadeIn();
+                $('#tracking').append(data.ord_track);
             },
             error: function (data) {
-                alert("Error");
+                $('.errorOrder').fadeIn();
             }
         });
 

@@ -15,6 +15,12 @@ class Cart
         $this->db->delete('cart', $cart);
     }
 
+    public function ClearCartOpts($cartID)
+    {
+        $cart = array('cart_ID' => $cartID);
+        $this->db->delete('cartopts', $cart);
+    }
+
     public function CalculateTotal($cartID)
     {
 

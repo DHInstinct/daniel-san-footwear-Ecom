@@ -70,6 +70,16 @@ a:hover {
   padding:3%;
 }
 
+.placedOrder{
+  border: 5px solid #e7ab3c;
+  color: #e7ab3c;
+}
+
+.errorOrder{
+  border: 5px solid #e7ab3c;
+  color: #e7ab3c;
+}
+
 /* CSS for clicking on photo */
 .photo-gallery {
   color: #313437;

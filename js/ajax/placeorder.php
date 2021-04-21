@@ -4,6 +4,7 @@ session_start();
     require_once("../../config.php");
 
     $order = new Order();
+    $cart = new Cart();
 
 //variable
     $shippingAddID = $_POST['shippingAddID'];
@@ -23,6 +24,10 @@ session_start();
 
     //sending order detail opts
     $data3 = $order->SendOrdetailsOPTS($lastID, session_id());
+
+    //clearing cart
+    $cart->ClearCart(session_id());
+    $cart->ClearCartOpts(session_id());
 
     echo json_encode($data);
     // echo json_encode($data2);

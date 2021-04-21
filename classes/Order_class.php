@@ -64,6 +64,14 @@ class Order {
         return $results;
     }
 
+    public function GetTrackingNum($cusID)
+    {
+        $query = "select * from cit410s21.order where cus_ID='$cusID'order by ord_Date desc";
+        $results = $this->db->get_results($query);
+
+        return $results;
+    }
+
 }
 
 
