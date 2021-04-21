@@ -44,11 +44,12 @@ class Customer {
         }
     }
 
-    public function AddAddress($cus_ID, $street, $city, $state, $zip)
+    public function AddAddress($cus_ID, $street, $street2, $city, $state, $zip)
     {
         $address = array(
             'cus_ID'=> $cus_ID,
             'add_Street'=> $street,
+            'add_Street2'=> $street2,
             'add_City'=> $city,
             'add_State'=> $state,
             'add_Zip'=>$zip

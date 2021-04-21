@@ -44,7 +44,7 @@
 <!-- Shopping Cart Section Begin -->
 <section class="checkout-section spad">
     <div class="container">
-        <form action="#" class="checkout-form">
+        <form action="#" class="submitForm checkout-form">
             <div class="row">
             <div class="checkout-content col-lg-12">
                         <?
@@ -66,17 +66,17 @@
                     <h4>Biiling and Shipping Details</h4>
                     <div class="row">
                         <div class="col-lg-6 form-label-group">
-                            <input type="text" placeholder='First Name'id="first">
+                            <input required type="text" placeholder='First Name'id="first">
                             <label for="fir">First Name<span>*</span></label>
                         </div>
                         <div class="col-lg-6 form-label-group">
-                            <input type="text" placeholder='Last Name'id="last">
+                            <input required type="text" placeholder='Last Name'id="last">
                             <label for="last">Last Name<span>*</span></label>
                         </div>
                         <div class="col-lg-12 form-label-group">
                             <input required type="text" id="street" placeholder='Street' class="street-first">
                             <label for="street">Street Address<span>*</span></label>
-                            <input type="text">
+                            <!-- <input type="text" id='street2'> -->
                         </div>
                         <div class="col-lg-12 form-label-group">
                             <input type="text" placeholder='Zip'id="zip">
@@ -126,9 +126,16 @@
                                         </div>
                                         </div>
                                     </div>
+                                    <form action='js/ajax/addAddress.php' method='post'>
                                 <div class="card-footer"> <button type="submit" id='payment' class=" addAddress subscribe btn btn-warning btn-block shadow-sm"> Add Payment and Address </button>
+                                        </form>
                             </div>
                             </div>
+                            <div id='addressSuccess'><div class='d-flex justify-content-center checkout-content col-lg-8 text-center'>
+                            <a class="content-btn">
+                                <h4 id='addressAppend'></h4>
+                            </a>
+                        </div></div>
                         </div>
                     </div>
                     <div class="col-lg-12">

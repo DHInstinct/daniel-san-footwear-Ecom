@@ -242,14 +242,16 @@ $(document).ready(function () {
         );
     });
 
-    //adding address
-    $('.addAddress').on("click", function (e) {
-        // address variables
+    $('#addressSuccess').hide();
 
+    //adding address
+    // $('.addAddress').on("submit", function (e) {
+    $('.submitForm').on("submit", function (e) {
+        // address variables
         e.preventDefault();
 
-
         var street = $('#street').val();
+        var street2 = $('#street2').val();
         var zip = $('#zip').val();
         var town = $('#town').val();
         var state = $('#state').val();
@@ -261,20 +263,22 @@ $(document).ready(function () {
         var cvv = $('#cvv').val()
 
 
-
         //ajax call
         $.ajax({
             url: 'js/ajax/addAddress.php',
-            data: { street: street, zip: zip, town: town, state: state, cardname: cardname, cardNum: cardNum, mm: mm, cvv: cvv },
+            data: { street: street, street2: street2, zip: zip, town: town, state: state, cardname: cardname, cardNum: cardNum, mm: mm, cvv: cvv },
             method: 'post',
             dataType: 'json',
 
             success: function (data) {
-                alert('Success');
+                $('#addressSuccess').fadeIn();
+                $('#addressAppend').html("Address and Card added.")
             },
 
             error: function (data) {
-                alert('Error adding address or Card.');
+                $('#addressSuccess').fadeIn();
+                $('#addressAppend').html("Something went wrong! Please check if you have entered correct data in all fields.")
+
             }
         });
 
@@ -317,7 +321,9 @@ $(document).ready(function () {
             },
 
             error: function (data) {
-                alert('Error Confirming address');
+                $('#addressSuccess').fadeIn();
+                $('#addressAppend').html("Something went wrong! Please check your Zip Code.")
+
             }
         });
 
