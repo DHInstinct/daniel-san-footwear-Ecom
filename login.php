@@ -1,11 +1,10 @@
 <?
      session_start();
-     require_once("header.php");
-
-    if(isset($_SESSION['userlogin'])){
-        //idk why this isn't working.
-        header('location: index.php');
+     
+     if(isset($_SESSION['userlogin'])){
+         header('location: index.php');
     }
+        require_once("header.php");
 ?>
 
 <!-- Register Section Begin -->

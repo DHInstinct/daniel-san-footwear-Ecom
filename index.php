@@ -45,7 +45,6 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
     <!-- Banner Section Begin -->
     <!-- Man Banner Section Begin -->
     <section class="man-banner spad">

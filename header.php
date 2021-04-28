@@ -181,7 +181,7 @@
                         </li>
                         <?
                         echo(isset($_SESSION['userlogin']) 
-                        ? "</li><li><a href='logout.php'>Logout</a></li><li id='greeting'>Hello, " . $_SESSION['userlogin'] . ""
+                        ? "</li><li><a href='logout.php'>Logout</a></li><a href='account.php'<li id='greeting'>Hello, " . $_SESSION['userlogin'] . "</a>"
                         : "<li><a href='./login.php'>Login</a></li>
                             "                          
                             );

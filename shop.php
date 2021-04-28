@@ -48,7 +48,7 @@
                     {
                         
                         echo("<div class='bc-item'>
-                        <a href='shop.php?subcat=". $data['id'] . "'>
+                        <a class='text-bold' href='shop.php?subcat=". $data['id'] . "'>
                             ".$data['name']."
                         </a>
                         </div>");

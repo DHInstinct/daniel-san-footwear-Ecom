@@ -1,14 +1,12 @@
 <?php
     session_start();
 
-    require_once("header.php");
     if(!isset($_SESSION['userid'])){
-        // ob_start();
-        //header("location: http:// " .$_SERVER['HTTP_HOST'] . "/index.php");
-        // HEADER IS NOT WORKING AHHHHHHHHHHHHHH
-        // echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
+        header("location: index.php");
+        // HEADER IS WORKING AHHHHHHHHHHHHHH
     }
-
+    
+    require_once("header.php");
     $cart = new Cart();
     $customer = new Customer();
 
@@ -56,7 +54,7 @@
                             echo("<div class=' addstyle'><a id='getAddress' class='content-btn'><h2>Addresses and Cards</h2></a></div>");
                             foreach($results as $result)
                             {
-                                echo("<div class='text-center col-lg-12 addstyle'><a data-carid='".  $result['car_ID'] ."' data-addid='".  $result['add_ID'] ."' data-cvv='".  $result['car_Sec'] ."' data-month='".  $result['car_Exp'] ."' data-cnum='".  $result['car_Num'] ."' data-carname='".  $result['car_Name'] ."' data-state='".  $result['add_State'] ."' data-town='".  $result['add_City'] ."' data-zip='".  $result['add_Zip'] ."' data-street='" .  $result['add_Street'] ."' href='#' id='fillCard'>" ."<strong>Street: </strong>" .  $result['add_Street'] ."<br /><strong>Card Num:</strong> ". $result['car_Num'] . "</a>");
+                                echo("<div class='text-center col-lg-12 addstyle'><a data-carid='".  $result['car_ID'] ."' data-addid='".  $result['add_ID'] ."' data-cvv='".  $result['car_Sec'] ."' data-month='".  $result['car_Exp'] ."' data-cnum='".  $result['car_Num'] ."' data-carname='".  $result['car_Name'] ."' data-state='".  $result['add_State'] ."' data-town='".  $result['add_City'] ."' data-zip='".  $result['add_Zip'] ."' data-street='" .  $result['add_Street'] ."' href='#' class='fillCard'>" ."<strong>Street: </strong>" .  $result['add_Street'] ."<br /><strong>Card Num:</strong> ". $result['car_Num'] . "</a>");
                                 echo('</div>');
                             }
                         }

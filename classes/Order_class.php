@@ -72,6 +72,35 @@ class Order {
         return $results;
     }
 
+    public function GetOrderViaCustomer($cusID)
+    {
+        $query = "sELECT sum(ord_Qty) as itemAmount, sum(ord_Price) as totalPrice, ord.ord_ID, ord.ord_Date, ord.ord_Track, add_Street, add_City, add_State, add_Zip
+        FROM cit410s21.order ord 
+        inner join orddetailopts odo on ord.ord_ID = odo.ord_ID
+        inner join orddetail od on odo.ord_ID = od.ord_ID
+        inner join address a on ord.add_ship = a.add_ID
+        where ord.cus_ID = $cusID group by ord.ord_ID order by ord.ord_ID;";
+
+        $results = $this->db->get_results($query);
+
+        return $results;
+
+    }
+
+    public function GetOrderDetails($cusID, $ordID)
+    {
+        $query="sELECT * FROM cit410s21.order ord inner join 
+        orddetailopts odo on ord.ord_ID = odo.ord_ID 
+        inner join orddetail od on odo.ord_ID = od.ord_ID
+        inner join product p on p.pro_ID = od.pro_ID
+        where cus_ID = $cusID and ord.ord_ID = $ordID order by ord.ord_ID;";
+
+        $results = $this->db->get_results($query);
+
+        return $results;
+    }
+
+
 }
 
 

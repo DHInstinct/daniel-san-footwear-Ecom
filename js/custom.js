@@ -362,10 +362,12 @@ $(document).ready(function () {
 
 
     //filling address form and card form on click
-    $('#fillCard').click(function () {
-        // alert('Filling Card');
+    $('.fillCard').click(function () {
 
         $('#street').val($(this).data('street'));
+        $('#addid').val($(this).data('addid'));
+        $('#cardid').val($(this).data('cardid'));
+        $('#street2').val($(this).data('street2'));
         $('#zip').val($(this).data('zip'));
         $('#town').val($(this).data('town'));
         $('#state').val($(this).data('state'));
@@ -387,6 +389,7 @@ $(document).ready(function () {
     //         return aVal - bVal;
     //     }));
     // }
+
     //sorting price asc
     $('.sort-price-asc').click(function () {
         tinysort('div.sort>div', { data: 'price', order: 'asc' });
