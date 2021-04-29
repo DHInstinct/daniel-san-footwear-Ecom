@@ -74,12 +74,12 @@ class Order {
 
     public function GetOrderViaCustomer($cusID)
     {
-        $query = "sELECT sum(ord_Qty) as itemAmount, sum(ord_Price) as totalPrice, ord.ord_ID, ord.ord_Date, ord.ord_Track, add_Street, add_City, add_State, add_Zip
+        $query = "sELECT ord.ord_ID, sum(ord_Price*ord_Qty) + ord.ord_ship as totalPrice, ord_Qty, ord.ord_ship, ord.ord_Date, ord.ord_Track, add_Street, add_City, add_State, add_Zip
         FROM cit410s21.order ord 
-        inner join orddetailopts odo on ord.ord_ID = odo.ord_ID
-        inner join orddetail od on odo.ord_ID = od.ord_ID
-        inner join address a on ord.add_ship = a.add_ID
-        where ord.cus_ID = $cusID group by ord.ord_ID order by ord.ord_ID;";
+        left join orddetailopts odo on ord.ord_ID = odo.ord_ID
+        left join orddetail od on ord.ord_ID = od.ord_ID
+        left join address a on ord.add_ship = a.add_ID
+		where ord.cus_ID =$cusID group by ord.ord_ID, ord.ord_ship order by ord.ord_ID;";
 
         $results = $this->db->get_results($query);
 
@@ -89,11 +89,11 @@ class Order {
 
     public function GetOrderDetails($cusID, $ordID)
     {
-        $query="sELECT * FROM cit410s21.order ord inner join 
-        orddetailopts odo on ord.ord_ID = odo.ord_ID 
-        inner join orddetail od on odo.ord_ID = od.ord_ID
-        inner join product p on p.pro_ID = od.pro_ID
-        where cus_ID = $cusID and ord.ord_ID = $ordID order by ord.ord_ID;";
+        $query="sELECT * FROM cit410s21.order ord 
+        inner join orddetail od on ord.ord_ID=od.ord_ID
+        inner join product p on p.pro_ID=od.pro_ID
+        where ord.cus_ID=$cusID and ord.ord_ID=$ordID
+        ";
 
         $results = $this->db->get_results($query);
 

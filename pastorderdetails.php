@@ -45,7 +45,7 @@ if(!isset($_SESSION['userlogin']) || !isset($_GET['ord_ID'])){
                   echo("
                   <tr>
                   <th scope='row'>" . $result['pro_Name'] . "</th>
-                  <td>" . $result['pro_Qty'] . "</td>
+                  <td>" . $result['ord_Qty'] . "</td>
                   <td>$" . $result['ord_Price'] . "</td>
                   <td>" . $result['ord_track'] . "</td>
                   </tr>
