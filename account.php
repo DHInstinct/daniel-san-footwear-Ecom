@@ -121,7 +121,7 @@ $customer = new Customer();
 <small class="form-text text-muted">Click an address above to autofill form</small>
 </div>
 <br />
-<form action='js/ajax/updateEmail.php' method='post' autocomplete='off'>
+<form action='js/ajax/updateAddress.php' method='post' autocomplete='off'>
   <div class="form-group form-label-group">
     <input  required type="text" class="form-control" name='street' id="street" aria-describedby="emailHelp" placeholder="Update email">
     <label for="exampleInputEmail1">Street Address</label>
@@ -130,7 +130,7 @@ $customer = new Customer();
   </div>
   <br />
   <div class="form-group form-label-group">
-    <input required type="text" class="form-control" name='street2' id="street2" aria-describedby="emailHelp" placeholder="Update email">
+    <input type="text" class="form-control" name='street2' id="street2" aria-describedby="emailHelp" placeholder="Update email">
     <label for="exampleInputEmail1">Street Address 2</label>
     <small id="emailHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
   </div>

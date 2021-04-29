@@ -366,6 +366,7 @@ $(document).ready(function () {
 
         $('#street').val($(this).data('street'));
         $('#addid').val($(this).data('addid'));
+        $('#addID').val($(this).data('addid'));
         $('#cardid').val($(this).data('cardid'));
         $('#street2').val($(this).data('street2'));
         $('#zip').val($(this).data('zip'));
